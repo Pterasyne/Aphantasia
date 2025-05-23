@@ -1,0 +1,1 @@
+Here are all the objects (modeled individually on blender) and various codes and scenes for integrating the virtual environment on unity. The javascript code (using jspsych) for the episodic memory test with binding measurement (and automatic evaluation via Levenshtein distance) is also available in this repository.
