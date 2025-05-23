@@ -1,0 +1,1253 @@
+const permutations = [
+          /* 00 */ ["repos", "sentiment", "dictionnaire", "mémoire", "tableau", "façon", "piscine", "confiance", "méthode", "côté", "vaisselle", "calendrier", "poche", "sourire", "chance", "activité", "science", "centre", "chanson", "reste", "intelligence", "fromage", "chaleur", "lecture", "effort", "vacance", "importance", "fenêtre", "salaire", "gouvernement", "excuse", "programme", "escalier", "environnement", "avantage", "plaisir", "voiture", "boisson", "bouteille", "travailleur", "carotte", "différence", "raison", "explication"],
+          /* 01 */ ["différence", "reste", "chanson", "poche", "environnement", "fromage", "intelligence", "effort", "lecture", "repos", "tableau", "vaisselle", "travailleur", "piscine", "voiture", "plaisir", "gouvernement", "escalier", "fenêtre", "explication", "salaire", "vacance", "méthode", "façon", "dictionnaire", "côté", "centre", "boisson", "activité", "avantage", "excuse", "calendrier", "confiance", "sentiment", "bouteille", "programme", "importance", "chaleur", "mémoire", "carotte", "science", "raison", "sourire", "chance"],
+          /* 02 */ ["avantage", "vacance", "programme", "gouvernement", "vaisselle", "piscine", "lecture", "effort", "bouteille", "explication", "fenêtre", "fromage", "escalier", "calendrier", "dictionnaire", "intelligence", "voiture", "méthode", "raison", "sentiment", "poche", "confiance", "excuse", "salaire", "sourire", "plaisir", "activité", "mémoire", "science", "importance", "chance", "différence", "environnement", "centre", "travailleur", "chaleur", "côté", "repos", "reste", "façon", "boisson", "chanson", "tableau", "carotte"],
+          /* 03 */ ["lecture", "façon", "raison", "bouteille", "avantage", "tableau", "environnement", "plaisir", "chaleur", "science", "vaisselle", "travailleur", "vacance", "voiture", "sentiment", "côté", "mémoire", "dictionnaire", "sourire", "méthode", "gouvernement", "carotte", "chanson", "escalier", "excuse", "différence", "fenêtre", "salaire", "fromage", "boisson", "explication", "chance", "reste", "activité", "effort", "calendrier", "repos", "intelligence", "programme", "piscine", "poche", "centre", "confiance", "importance"],
+          /* 04 */ ["explication", "méthode", "côté", "intelligence", "travailleur", "sentiment", "différence", "tableau", "chaleur", "plaisir", "science", "poche", "voiture", "sourire", "importance", "calendrier", "dictionnaire", "piscine", "fromage", "excuse", "escalier", "activité", "gouvernement", "raison", "avantage", "environnement", "chance", "vaisselle", "reste", "programme", "salaire", "boisson", "fenêtre", "mémoire", "confiance", "centre", "lecture", "repos", "vacance", "façon", "carotte", "effort", "bouteille", "chanson"],
+          /* 05 */ ["sentiment", "chance", "chaleur", "environnement", "reste", "lecture", "voiture", "fenêtre", "repos", "côté", "différence", "boisson", "plaisir", "centre", "programme", "escalier", "intelligence", "science", "poche", "vacance", "gouvernement", "façon", "mémoire", "méthode", "carotte", "calendrier", "chanson", "activité", "raison", "bouteille", "avantage", "excuse", "tableau", "dictionnaire", "effort", "fromage", "confiance", "importance", "salaire", "piscine", "explication", "travailleur", "sourire", "vaisselle"],
+          /* 06 */ ["escalier", "côté", "poche", "effort", "boisson", "lecture", "intelligence", "travailleur", "gouvernement", "sourire", "calendrier", "dictionnaire", "sentiment", "reste", "chance", "importance", "différence", "plaisir", "programme", "centre", "science", "méthode", "chanson", "voiture", "façon", "environnement", "tableau", "activité", "vaisselle", "explication", "carotte", "fenêtre", "bouteille", "confiance", "repos", "salaire", "piscine", "chaleur", "avantage", "fromage", "excuse", "vacance", "raison", "mémoire"],
+          /* 07 */ ["chanson", "sentiment", "façon", "activité", "tableau", "reste", "programme", "bouteille", "calendrier", "excuse", "escalier", "science", "méthode", "raison", "chaleur", "fenêtre", "intelligence", "environnement", "côté", "voiture", "lecture", "plaisir", "travailleur", "vaisselle", "différence", "fromage", "centre", "sourire", "confiance", "gouvernement", "piscine", "mémoire", "carotte", "boisson", "explication", "importance", "repos", "effort", "vacance", "dictionnaire", "poche", "salaire", "chance", "avantage"],
+          /* 08 */ ["escalier", "vacance", "science", "effort", "travailleur", "sentiment", "gouvernement", "méthode", "explication", "vaisselle", "différence", "centre", "chance", "raison", "bouteille", "avantage", "sourire", "fromage", "dictionnaire", "intelligence", "côté", "fenêtre", "salaire", "environnement", "confiance", "calendrier", "excuse", "programme", "activité", "façon", "boisson", "chanson", "plaisir", "carotte", "poche", "importance", "reste", "mémoire", "voiture", "piscine", "chaleur", "repos", "tableau", "lecture"],
+          /* 09 */ ["plaisir", "poche", "activité", "lecture", "dictionnaire", "boisson", "intelligence", "fromage", "fenêtre", "science", "reste", "travailleur", "bouteille", "chaleur", "repos", "calendrier", "centre", "effort", "programme", "piscine", "confiance", "environnement", "façon", "méthode", "excuse", "voiture", "vacance", "chance", "sentiment", "explication", "gouvernement", "importance", "vaisselle", "sourire", "carotte", "mémoire", "tableau", "salaire", "chanson", "différence", "raison", "escalier", "côté", "avantage"],
+          /* 10 */ ["repos", "salaire", "travailleur", "avantage", "piscine", "tableau", "effort", "côté", "dictionnaire", "chanson", "reste", "programme", "mémoire", "fenêtre", "méthode", "carotte", "gouvernement", "chance", "sourire", "science", "voiture", "raison", "chaleur", "vaisselle", "escalier", "activité", "bouteille", "plaisir", "confiance", "intelligence", "calendrier", "boisson", "fromage", "sentiment", "poche", "façon", "centre", "environnement", "importance", "excuse", "explication", "lecture", "différence", "vacance"],
+          /* 11 */ ["confiance", "vacance", "fenêtre", "programme", "explication", "bouteille", "carotte", "calendrier", "excuse", "reste", "façon", "science", "activité", "gouvernement", "dictionnaire", "tableau", "plaisir", "effort", "centre", "sentiment", "voiture", "mémoire", "piscine", "environnement", "chaleur", "boisson", "côté", "repos", "raison", "chance", "chanson", "escalier", "salaire", "sourire", "fromage", "poche", "importance", "méthode", "lecture", "différence", "intelligence", "avantage", "travailleur", "vaisselle"],
+          /* 12 */ ["façon", "centre", "lecture", "poche", "bouteille", "carotte", "mémoire", "voiture", "méthode", "plaisir", "environnement", "boisson", "chaleur", "reste", "calendrier", "fromage", "vaisselle", "dictionnaire", "activité", "sourire", "repos", "raison", "fenêtre", "chanson", "science", "travailleur", "excuse", "intelligence", "escalier", "tableau", "différence", "effort", "sentiment", "côté", "avantage", "confiance", "gouvernement", "vacance", "explication", "chance", "programme", "salaire", "importance", "piscine"],
+          /* 13 */ ["environnement", "gouvernement", "mémoire", "voiture", "vacance", "raison", "plaisir", "programme", "activité", "carotte", "centre", "tableau", "travailleur", "chanson", "avantage", "vaisselle", "côté", "fromage", "boisson", "calendrier", "repos", "excuse", "explication", "différence", "dictionnaire", "poche", "intelligence", "bouteille", "salaire", "escalier", "science", "effort", "façon", "chaleur", "sentiment", "lecture", "reste", "confiance", "fenêtre", "méthode", "piscine", "chance", "importance", "sourire"],
+          /* 14 */ ["tableau", "raison", "vacance", "effort", "fromage", "façon", "côté", "avantage", "chance", "fenêtre", "boisson", "bouteille", "science", "piscine", "chanson", "confiance", "plaisir", "environnement", "salaire", "calendrier", "centre", "explication", "mémoire", "sourire", "poche", "programme", "différence", "escalier", "activité", "voiture", "lecture", "chaleur", "sentiment", "méthode", "travailleur", "carotte", "excuse", "intelligence", "repos", "reste", "vaisselle", "gouvernement", "dictionnaire", "importance"],
+          /* 15 */ ["piscine", "méthode", "fromage", "vacance", "reste", "carotte", "calendrier", "façon", "importance", "repos", "chanson", "différence", "salaire", "confiance", "raison", "bouteille", "vaisselle", "plaisir", "centre", "poche", "tableau", "dictionnaire", "intelligence", "sentiment", "voiture", "gouvernement", "chance", "avantage", "chaleur", "activité", "mémoire", "sourire", "explication", "lecture", "science", "escalier", "excuse", "environnement", "fenêtre", "boisson", "programme", "côté", "travailleur", "effort"],
+          /* 16 */ ["piscine", "calendrier", "dictionnaire", "reste", "côté", "travailleur", "environnement", "boisson", "poche", "salaire", "importance", "sourire", "façon", "fenêtre", "différence", "centre", "intelligence", "méthode", "bouteille", "plaisir", "lecture", "excuse", "chanson", "tableau", "mémoire", "sentiment", "vaisselle", "escalier", "explication", "fromage", "effort", "vacance", "voiture", "activité", "avantage", "science", "gouvernement", "chaleur", "repos", "chance", "confiance", "programme", "raison", "carotte"],
+          /* 17 */ ["environnement", "escalier", "travailleur", "vaisselle", "vacance", "carotte", "chance", "importance", "côté", "plaisir", "piscine", "confiance", "intelligence", "chaleur", "chanson", "programme", "voiture", "boisson", "raison", "effort", "dictionnaire", "repos", "reste", "poche", "centre", "activité", "tableau", "sourire", "façon", "gouvernement", "bouteille", "excuse", "explication", "science", "avantage", "fenêtre", "mémoire", "sentiment", "fromage", "calendrier", "différence", "lecture", "méthode", "salaire"],
+          /* 18 */ ["lecture", "reste", "importance", "chance", "sourire", "mémoire", "salaire", "différence", "sentiment", "plaisir", "vacance", "vaisselle", "carotte", "environnement", "chanson", "chaleur", "excuse", "activité", "centre", "méthode", "confiance", "escalier", "façon", "intelligence", "boisson", "bouteille", "voiture", "raison", "explication", "repos", "science", "piscine", "fromage", "programme", "travailleur", "gouvernement", "poche", "effort", "dictionnaire", "côté", "fenêtre", "tableau", "calendrier", "avantage"],
+          /* 19 */ ["fenêtre", "mémoire", "tableau", "dictionnaire", "sentiment", "travailleur", "sourire", "salaire", "différence", "boisson", "programme", "plaisir", "explication", "poche", "activité", "fromage", "effort", "raison", "importance", "côté", "bouteille", "piscine", "gouvernement", "excuse", "vaisselle", "chaleur", "environnement", "escalier", "centre", "méthode", "façon", "confiance", "reste", "vacance", "carotte", "avantage", "lecture", "science", "voiture", "repos", "chanson", "intelligence", "calendrier", "chance"],
+          /* 20 */ ["calendrier", "tableau", "différence", "programme", "excuse", "escalier", "fenêtre", "science", "activité", "plaisir", "confiance", "lecture", "salaire", "chance", "reste", "méthode", "gouvernement", "carotte", "travailleur", "vaisselle", "dictionnaire", "vacance", "environnement", "intelligence", "sourire", "piscine", "centre", "façon", "mémoire", "sentiment", "repos", "chanson", "voiture", "importance", "bouteille", "boisson", "raison", "explication", "avantage", "fromage", "effort", "chaleur", "poche", "côté"],
+          /* 21 */ ["chaleur", "reste", "importance", "repos", "gouvernement", "vaisselle", "sourire", "intelligence", "vacance", "plaisir", "façon", "mémoire", "dictionnaire", "différence", "science", "piscine", "méthode", "explication", "sentiment", "excuse", "activité", "chanson", "avantage", "chance", "carotte", "programme", "environnement", "effort", "fromage", "calendrier", "bouteille", "travailleur", "salaire", "poche", "tableau", "côté", "raison", "fenêtre", "lecture", "centre", "escalier", "voiture", "boisson", "confiance"],
+          /* 22 */ ["différence", "importance", "effort", "mémoire", "reste", "repos", "vaisselle", "programme", "sentiment", "centre", "fenêtre", "confiance", "voiture", "intelligence", "travailleur", "façon", "raison", "science", "boisson", "fromage", "dictionnaire", "bouteille", "avantage", "piscine", "explication", "escalier", "chaleur", "carotte", "activité", "gouvernement", "sourire", "méthode", "calendrier", "environnement", "côté", "salaire", "poche", "vacance", "tableau", "plaisir", "excuse", "lecture", "chanson", "chance"],
+          /* 23 */ ["intelligence", "tableau", "lecture", "méthode", "calendrier", "côté", "raison", "escalier", "environnement", "voiture", "piscine", "chance", "importance", "sourire", "reste", "façon", "science", "vaisselle", "chanson", "explication", "plaisir", "activité", "sentiment", "boisson", "avantage", "effort", "centre", "vacance", "poche", "salaire", "chaleur", "fromage", "différence", "excuse", "fenêtre", "mémoire", "bouteille", "dictionnaire", "travailleur", "gouvernement", "programme", "confiance", "repos", "carotte"],
+          /* 24 */ ["intelligence", "chaleur", "vaisselle", "science", "confiance", "lecture", "carotte", "effort", "reste", "dictionnaire", "travailleur", "mémoire", "salaire", "plaisir", "excuse", "importance", "calendrier", "fromage", "environnement", "sentiment", "tableau", "chance", "piscine", "gouvernement", "repos", "différence", "activité", "côté", "escalier", "façon", "raison", "avantage", "programme", "sourire", "bouteille", "chanson", "fenêtre", "poche", "voiture", "centre", "explication", "vacance", "méthode", "boisson"],
+          /* 25 */ ["raison", "repos", "calendrier", "gouvernement", "travailleur", "poche", "chance", "importance", "méthode", "environnement", "carotte", "chaleur", "côté", "chanson", "vaisselle", "escalier", "différence", "bouteille", "salaire", "programme", "mémoire", "excuse", "voiture", "piscine", "centre", "vacance", "confiance", "dictionnaire", "explication", "intelligence", "avantage", "fromage", "lecture", "reste", "boisson", "sourire", "science", "fenêtre", "plaisir", "tableau", "sentiment", "effort", "activité", "façon"],
+          /* 26 */ ["avantage", "programme", "vaisselle", "chance", "plaisir", "excuse", "vacance", "centre", "raison", "chaleur", "fromage", "boisson", "dictionnaire", "poche", "explication", "travailleur", "sentiment", "sourire", "fenêtre", "façon", "calendrier", "méthode", "repos", "voiture", "science", "lecture", "piscine", "environnement", "différence", "gouvernement", "salaire", "tableau", "chanson", "mémoire", "escalier", "côté", "bouteille", "importance", "confiance", "carotte", "intelligence", "activité", "reste", "effort"],
+          /* 27 */ ["centre", "voiture", "confiance", "vaisselle", "fenêtre", "boisson", "intelligence", "avantage", "raison", "calendrier", "escalier", "fromage", "salaire", "bouteille", "dictionnaire", "reste", "poche", "environnement", "piscine", "mémoire", "plaisir", "chanson", "tableau", "repos", "effort", "chance", "méthode", "côté", "programme", "sourire", "sentiment", "vacance", "explication", "excuse", "lecture", "importance", "différence", "gouvernement", "science", "façon", "chaleur", "carotte", "activité", "travailleur"],
+          /* 28 */ ["programme", "côté", "salaire", "avantage", "différence", "confiance", "gouvernement", "vacance", "effort", "tableau", "intelligence", "science", "bouteille", "calendrier", "carotte", "chaleur", "reste", "raison", "chanson", "poche", "environnement", "fromage", "activité", "centre", "méthode", "lecture", "escalier", "explication", "excuse", "mémoire", "voiture", "travailleur", "sentiment", "piscine", "chance", "vaisselle", "plaisir", "repos", "sourire", "façon", "fenêtre", "dictionnaire", "importance", "boisson"],
+          /* 29 */ ["poche", "fromage", "chance", "explication", "escalier", "intelligence", "travailleur", "dictionnaire", "tableau", "importance", "raison", "avantage", "côté", "piscine", "effort", "gouvernement", "méthode", "reste", "vaisselle", "voiture", "activité", "repos", "mémoire", "sourire", "bouteille", "boisson", "chanson", "sentiment", "environnement", "lecture", "différence", "carotte", "centre", "plaisir", "confiance", "fenêtre", "science", "chaleur", "calendrier", "programme", "vacance", "façon", "salaire", "excuse"],
+          /* 30 */ ["reste", "environnement", "voiture", "différence", "chanson", "sourire", "avantage", "raison", "excuse", "fenêtre", "façon", "carotte", "boisson", "importance", "mémoire", "méthode", "programme", "poche", "fromage", "intelligence", "escalier", "gouvernement", "dictionnaire", "vaisselle", "travailleur", "activité", "repos", "chance", "confiance", "tableau", "côté", "explication", "piscine", "plaisir", "calendrier", "effort", "science", "centre", "sentiment", "bouteille", "salaire", "chaleur", "vacance", "lecture"],
+          /* 31 */ ["intelligence", "salaire", "chaleur", "raison", "gouvernement", "travailleur", "carotte", "excuse", "fromage", "mémoire", "façon", "tableau", "bouteille", "poche", "côté", "science", "fenêtre", "sourire", "importance", "vaisselle", "lecture", "activité", "environnement", "programme", "dictionnaire", "repos", "avantage", "effort", "sentiment", "chance", "chanson", "différence", "plaisir", "calendrier", "vacance", "reste", "confiance", "centre", "voiture", "méthode", "boisson", "escalier", "explication", "piscine"],
+          /* 32 */ ["centre", "reste", "escalier", "fenêtre", "lecture", "programme", "raison", "importance", "excuse", "gouvernement", "activité", "sourire", "différence", "façon", "chanson", "mémoire", "dictionnaire", "chance", "sentiment", "plaisir", "explication", "carotte", "travailleur", "calendrier", "science", "intelligence", "avantage", "confiance", "méthode", "côté", "voiture", "piscine", "fromage", "vacance", "chaleur", "bouteille", "salaire", "effort", "repos", "tableau", "poche", "environnement", "vaisselle", "boisson"],
+          /* 33 */ ["centre", "fromage", "escalier", "vacance", "boisson", "reste", "sourire", "programme", "fenêtre", "environnement", "lecture", "avantage", "tableau", "différence", "méthode", "chanson", "poche", "activité", "bouteille", "intelligence", "vaisselle", "plaisir", "façon", "voiture", "confiance", "importance", "carotte", "calendrier", "excuse", "effort", "piscine", "explication", "sentiment", "raison", "science", "mémoire", "dictionnaire", "chance", "repos", "côté", "salaire", "gouvernement", "travailleur", "chaleur"],
+          /* 34 */ ["poche", "fenêtre", "bouteille", "méthode", "raison", "piscine", "centre", "reste", "fromage", "carotte", "environnement", "gouvernement", "calendrier", "repos", "intelligence", "façon", "vaisselle", "excuse", "sentiment", "vacance", "activité", "chance", "dictionnaire", "lecture", "programme", "tableau", "différence", "mémoire", "effort", "boisson", "voiture", "chaleur", "sourire", "plaisir", "escalier", "chanson", "importance", "travailleur", "science", "salaire", "avantage", "explication", "côté", "confiance"],
+          /* 35 */ ["gouvernement", "vaisselle", "lecture", "vacance", "carotte", "travailleur", "fromage", "repos", "escalier", "bouteille", "confiance", "chance", "sourire", "reste", "voiture", "chanson", "importance", "méthode", "programme", "raison", "poche", "plaisir", "activité", "tableau", "effort", "sentiment", "environnement", "piscine", "façon", "centre", "science", "excuse", "salaire", "côté", "explication", "fenêtre", "mémoire", "intelligence", "différence", "chaleur", "dictionnaire", "boisson", "calendrier", "avantage"],
+          /* 36 */ ["travailleur", "intelligence", "science", "repos", "raison", "environnement", "effort", "boisson", "importance", "méthode", "chanson", "poche", "gouvernement", "vacance", "mémoire", "sentiment", "façon", "sourire", "carotte", "reste", "vaisselle", "chaleur", "fenêtre", "piscine", "calendrier", "programme", "plaisir", "bouteille", "avantage", "confiance", "fromage", "côté", "chance", "différence", "activité", "excuse", "centre", "salaire", "voiture", "escalier", "dictionnaire", "explication", "tableau", "lecture"],
+          /* 37 */ ["sourire", "excuse", "vaisselle", "chaleur", "repos", "centre", "avantage", "méthode", "reste", "boisson", "dictionnaire", "escalier", "science", "chanson", "fenêtre", "bouteille", "activité", "calendrier", "piscine", "intelligence", "côté", "fromage", "lecture", "carotte", "différence", "raison", "salaire", "mémoire", "effort", "chance", "gouvernement", "tableau", "poche", "explication", "voiture", "environnement", "façon", "confiance", "sentiment", "travailleur", "vacance", "programme", "importance", "plaisir"],
+          /* 38 */ ["intelligence", "poche", "façon", "programme", "tableau", "sourire", "vaisselle", "environnement", "chance", "fenêtre", "méthode", "plaisir", "voiture", "vacance", "côté", "salaire", "confiance", "calendrier", "excuse", "piscine", "chaleur", "dictionnaire", "effort", "science", "boisson", "chanson", "différence", "bouteille", "lecture", "avantage", "fromage", "raison", "sentiment", "gouvernement", "mémoire", "travailleur", "centre", "carotte", "escalier", "repos", "reste", "explication", "importance", "activité"],
+          /* 39 */ ["programme", "calendrier", "gouvernement", "bouteille", "plaisir", "avantage", "escalier", "excuse", "sentiment", "activité", "carotte", "importance", "voiture", "poche", "chance", "salaire", "centre", "travailleur", "lecture", "sourire", "fromage", "différence", "reste", "effort", "intelligence", "piscine", "façon", "environnement", "confiance", "boisson", "chanson", "repos", "côté", "dictionnaire", "science", "vacance", "méthode", "tableau", "mémoire", "explication", "fenêtre", "chaleur", "vaisselle", "raison"],
+          /* 40 */ ["côté", "travailleur", "intelligence", "voiture", "centre", "fromage", "dictionnaire", "tableau", "poche", "carotte", "piscine", "chance", "chaleur", "repos", "différence", "reste", "activité", "lecture", "salaire", "calendrier", "plaisir", "importance", "effort", "sourire", "vaisselle", "excuse", "explication", "programme", "avantage", "chanson", "environnement", "boisson", "science", "gouvernement", "confiance", "vacance", "méthode", "fenêtre", "escalier", "façon", "raison", "bouteille", "mémoire", "sentiment"],
+          /* 41 */ ["environnement", "poche", "plaisir", "vacance", "raison", "fenêtre", "carotte", "piscine", "vaisselle", "explication", "tableau", "sentiment", "salaire", "science", "voiture", "avantage", "façon", "chanson", "côté", "sourire", "reste", "centre", "chaleur", "confiance", "repos", "méthode", "escalier", "différence", "chance", "lecture", "boisson", "dictionnaire", "mémoire", "fromage", "programme", "intelligence", "bouteille", "activité", "calendrier", "effort", "travailleur", "gouvernement", "importance", "excuse"],
+          /* 42 */ ["activité", "salaire", "environnement", "plaisir", "méthode", "reste", "sentiment", "intelligence", "façon", "travailleur", "science", "bouteille", "gouvernement", "fromage", "lecture", "fenêtre", "avantage", "importance", "dictionnaire", "mémoire", "calendrier", "carotte", "excuse", "repos", "chanson", "différence", "vacance", "chaleur", "raison", "côté", "chance", "confiance", "voiture", "poche", "centre", "vaisselle", "programme", "tableau", "effort", "explication", "piscine", "escalier", "boisson", "sourire"],
+          /* 43 */ ["chaleur", "escalier", "gouvernement", "sentiment", "intelligence", "carotte", "vacance", "explication", "effort", "science", "confiance", "bouteille", "différence", "lecture", "salaire", "environnement", "programme", "raison", "côté", "piscine", "travailleur", "méthode", "boisson", "fenêtre", "chanson", "plaisir", "fromage", "tableau", "calendrier", "centre", "poche", "sourire", "chance", "activité", "façon", "mémoire", "repos", "dictionnaire", "importance", "excuse", "avantage", "vaisselle", "voiture", "reste"],
+          /* 44 */ ["chanson", "sentiment", "reste", "environnement", "science", "programme", "différence", "repos", "importance", "vacance", "confiance", "gouvernement", "chance", "salaire", "chaleur", "méthode", "poche", "tableau", "escalier", "voiture", "carotte", "bouteille", "vaisselle", "plaisir", "dictionnaire", "fenêtre", "travailleur", "façon", "explication", "boisson", "avantage", "activité", "effort", "excuse", "sourire", "raison", "fromage", "côté", "mémoire", "piscine", "intelligence", "lecture", "centre", "calendrier"],
+          /* 45 */ ["science", "tableau", "boisson", "intelligence", "excuse", "chance", "vaisselle", "calendrier", "activité", "repos", "différence", "vacance", "voiture", "dictionnaire", "lecture", "chaleur", "centre", "carotte", "sentiment", "méthode", "façon", "mémoire", "sourire", "côté", "confiance", "poche", "piscine", "fromage", "raison", "environnement", "avantage", "explication", "fenêtre", "salaire", "plaisir", "reste", "chanson", "importance", "gouvernement", "programme", "bouteille", "effort", "travailleur", "escalier"],
+          /* 46 */ ["fenêtre", "boisson", "chaleur", "importance", "repos", "différence", "mémoire", "vacance", "science", "gouvernement", "confiance", "effort", "explication", "lecture", "côté", "bouteille", "plaisir", "centre", "calendrier", "vaisselle", "intelligence", "reste", "dictionnaire", "travailleur", "chanson", "activité", "piscine", "excuse", "sentiment", "escalier", "avantage", "poche", "façon", "programme", "raison", "environnement", "voiture", "fromage", "carotte", "sourire", "salaire", "tableau", "méthode", "chance"],
+          /* 47 */ ["intelligence", "différence", "travailleur", "centre", "confiance", "calendrier", "sourire", "programme", "salaire", "bouteille", "repos", "méthode", "gouvernement", "poche", "importance", "piscine", "chance", "voiture", "côté", "vaisselle", "reste", "science", "fenêtre", "sentiment", "chanson", "chaleur", "tableau", "dictionnaire", "excuse", "fromage", "environnement", "explication", "vacance", "plaisir", "carotte", "raison", "effort", "avantage", "activité", "lecture", "boisson", "mémoire", "escalier", "façon"],
+          /* 48 */ ["plaisir", "gouvernement", "importance", "reste", "voiture", "bouteille", "programme", "activité", "boisson", "dictionnaire", "calendrier", "côté", "chaleur", "raison", "vacance", "lecture", "repos", "fenêtre", "piscine", "avantage", "méthode", "salaire", "poche", "différence", "chanson", "façon", "escalier", "environnement", "sourire", "intelligence", "science", "travailleur", "excuse", "effort", "chance", "tableau", "fromage", "carotte", "sentiment", "centre", "explication", "confiance", "vaisselle", "mémoire"],
+          /* 49 */ ["chaleur", "chanson", "escalier", "repos", "carotte", "fromage", "sourire", "travailleur", "reste", "programme", "bouteille", "confiance", "plaisir", "façon", "mémoire", "calendrier", "importance", "explication", "avantage", "lecture", "science", "méthode", "boisson", "côté", "chance", "raison", "activité", "gouvernement", "excuse", "vaisselle", "salaire", "poche", "dictionnaire", "voiture", "fenêtre", "effort", "environnement", "différence", "vacance", "piscine", "tableau", "sentiment", "intelligence", "centre"],
+          /* 50 */ ["environnement", "voiture", "bouteille", "raison", "façon", "confiance", "programme", "boisson", "avantage", "dictionnaire", "excuse", "fenêtre", "méthode", "tableau", "côté", "travailleur", "différence", "explication", "vacance", "calendrier", "reste", "chance", "sentiment", "plaisir", "centre", "intelligence", "piscine", "gouvernement", "carotte", "chaleur", "lecture", "activité", "escalier", "poche", "sourire", "fromage", "vaisselle", "salaire", "repos", "chanson", "importance", "effort", "science", "mémoire"],
+          /* 51 */ ["salaire", "chaleur", "boisson", "intelligence", "voiture", "vacance", "escalier", "excuse", "calendrier", "méthode", "côté", "effort", "importance", "dictionnaire", "sentiment", "confiance", "bouteille", "reste", "mémoire", "chance", "sourire", "façon", "activité", "avantage", "science", "programme", "tableau", "centre", "environnement", "poche", "plaisir", "raison", "gouvernement", "fromage", "vaisselle", "repos", "explication", "piscine", "lecture", "chanson", "fenêtre", "carotte", "travailleur", "différence"],
+          /* 52 */ ["raison", "explication", "escalier", "poche", "méthode", "calendrier", "repos", "mémoire", "intelligence", "avantage", "façon", "tableau", "côté", "dictionnaire", "sourire", "salaire", "gouvernement", "chaleur", "piscine", "activité", "fromage", "différence", "confiance", "reste", "sentiment", "centre", "travailleur", "vacance", "voiture", "environnement", "chanson", "programme", "science", "carotte", "chance", "boisson", "excuse", "effort", "lecture", "fenêtre", "vaisselle", "importance", "plaisir", "bouteille"],
+          /* 53 */ ["voiture", "avantage", "bouteille", "science", "raison", "reste", "fenêtre", "escalier", "chanson", "calendrier", "poche", "chaleur", "importance", "différence", "excuse", "sentiment", "sourire", "programme", "vaisselle", "activité", "chance", "boisson", "côté", "plaisir", "salaire", "lecture", "intelligence", "piscine", "carotte", "dictionnaire", "méthode", "effort", "fromage", "travailleur", "explication", "vacance", "gouvernement", "mémoire", "confiance", "repos", "tableau", "environnement", "façon", "centre"],
+          /* 54 */ ["salaire", "intelligence", "confiance", "lecture", "raison", "chaleur", "poche", "différence", "repos", "plaisir", "chanson", "sentiment", "voiture", "effort", "gouvernement", "bouteille", "boisson", "sourire", "vacance", "explication", "escalier", "programme", "science", "mémoire", "calendrier", "façon", "piscine", "côté", "importance", "avantage", "reste", "dictionnaire", "vaisselle", "carotte", "chance", "fromage", "méthode", "centre", "activité", "tableau", "fenêtre", "excuse", "environnement", "travailleur"],
+          /* 55 */ ["importance", "fromage", "vaisselle", "repos", "dictionnaire", "activité", "reste", "calendrier", "science", "gouvernement", "côté", "travailleur", "méthode", "poche", "bouteille", "sourire", "boisson", "raison", "intelligence", "façon", "effort", "excuse", "carotte", "explication", "confiance", "chance", "fenêtre", "lecture", "voiture", "chanson", "sentiment", "plaisir", "programme", "salaire", "piscine", "avantage", "tableau", "centre", "différence", "mémoire", "vacance", "escalier", "chaleur", "environnement"],
+          /* 56 */ ["plaisir", "fenêtre", "programme", "environnement", "intelligence", "lecture", "avantage", "escalier", "côté", "carotte", "travailleur", "vacance", "activité", "centre", "vaisselle", "sentiment", "repos", "fromage", "calendrier", "effort", "dictionnaire", "boisson", "science", "façon", "excuse", "bouteille", "piscine", "méthode", "explication", "tableau", "reste", "mémoire", "chance", "importance", "poche", "différence", "chaleur", "confiance", "voiture", "salaire", "raison", "gouvernement", "chanson", "sourire"],
+          /* 57 */ ["lecture", "façon", "chanson", "centre", "carotte", "excuse", "dictionnaire", "importance", "poche", "côté", "vacance", "science", "reste", "travailleur", "activité", "tableau", "intelligence", "fromage", "bouteille", "piscine", "gouvernement", "repos", "sourire", "escalier", "confiance", "programme", "avantage", "chaleur", "environnement", "sentiment", "plaisir", "salaire", "chance", "voiture", "effort", "boisson", "raison", "calendrier", "méthode", "vaisselle", "explication", "fenêtre", "différence", "mémoire"],
+          /* 58 */ ["poche", "mémoire", "effort", "dictionnaire", "raison", "lecture", "méthode", "intelligence", "reste", "chaleur", "sentiment", "vacance", "côté", "gouvernement", "fenêtre", "programme", "importance", "carotte", "explication", "tableau", "travailleur", "différence", "activité", "salaire", "calendrier", "façon", "chanson", "fromage", "sourire", "chance", "plaisir", "boisson", "voiture", "escalier", "science", "avantage", "excuse", "environnement", "confiance", "repos", "bouteille", "centre", "piscine", "vaisselle"],
+          /* 59 */ ["activité", "explication", "avantage", "escalier", "plaisir", "méthode", "science", "sentiment", "poche", "sourire", "bouteille", "mémoire", "reste", "chance", "boisson", "gouvernement", "façon", "environnement", "tableau", "lecture", "fenêtre", "repos", "centre", "dictionnaire", "confiance", "différence", "vaisselle", "vacance", "intelligence", "voiture", "travailleur", "côté", "effort", "programme", "importance", "carotte", "chaleur", "excuse", "raison", "chanson", "fromage", "salaire", "piscine", "calendrier"],
+          /* 60 */ ["fromage", "confiance", "activité", "sentiment", "carotte", "boisson", "bouteille", "lecture", "gouvernement", "plaisir", "piscine", "chaleur", "mémoire", "reste", "calendrier", "différence", "avantage", "sourire", "méthode", "chanson", "escalier", "vacance", "côté", "fenêtre", "importance", "programme", "environnement", "façon", "voiture", "chance", "raison", "salaire", "excuse", "poche", "explication", "travailleur", "effort", "dictionnaire", "tableau", "centre", "intelligence", "vaisselle", "science", "repos"],
+          /* 61 */ ["avantage", "boisson", "méthode", "sentiment", "travailleur", "chaleur", "escalier", "bouteille", "effort", "plaisir", "carotte", "importance", "chanson", "fromage", "programme", "calendrier", "vaisselle", "différence", "sourire", "dictionnaire", "intelligence", "excuse", "lecture", "mémoire", "voiture", "salaire", "reste", "science", "confiance", "environnement", "vacance", "activité", "côté", "piscine", "façon", "poche", "chance", "raison", "fenêtre", "centre", "gouvernement", "repos", "tableau", "explication"],
+          /* 62 */ ["gouvernement", "science", "plaisir", "sentiment", "environnement", "centre", "fromage", "repos", "importance", "vaisselle", "avantage", "intelligence", "explication", "raison", "vacance", "différence", "poche", "excuse", "chanson", "chance", "côté", "confiance", "calendrier", "activité", "programme", "fenêtre", "salaire", "bouteille", "façon", "méthode", "lecture", "carotte", "tableau", "mémoire", "reste", "chaleur", "voiture", "boisson", "sourire", "travailleur", "escalier", "piscine", "effort", "dictionnaire"],
+          /* 63 */ ["confiance", "science", "travailleur", "piscine", "vaisselle", "environnement", "salaire", "carotte", "côté", "explication", "lecture", "calendrier", "façon", "boisson", "chaleur", "effort", "avantage", "fenêtre", "bouteille", "chance", "poche", "raison", "méthode", "repos", "tableau", "escalier", "intelligence", "sentiment", "activité", "mémoire", "reste", "voiture", "sourire", "chanson", "programme", "dictionnaire", "vacance", "importance", "gouvernement", "fromage", "centre", "excuse", "plaisir", "différence"],
+          /* 64 */ ["boisson", "calendrier", "mémoire", "poche", "programme", "dictionnaire", "travailleur", "fenêtre", "lecture", "salaire", "effort", "gouvernement", "vacance", "différence", "reste", "confiance", "environnement", "importance", "raison", "centre", "côté", "fromage", "intelligence", "sentiment", "méthode", "vaisselle", "science", "chanson", "explication", "bouteille", "repos", "chance", "piscine", "carotte", "voiture", "activité", "excuse", "façon", "escalier", "avantage", "tableau", "chaleur", "plaisir", "sourire"],
+          /* 65 */ ["environnement", "activité", "escalier", "vacance", "voiture", "sentiment", "poche", "fenêtre", "centre", "mémoire", "méthode", "reste", "avantage", "chaleur", "plaisir", "raison", "fromage", "programme", "importance", "lecture", "différence", "salaire", "vaisselle", "confiance", "tableau", "façon", "gouvernement", "science", "chance", "carotte", "dictionnaire", "intelligence", "effort", "travailleur", "explication", "piscine", "boisson", "bouteille", "chanson", "côté", "repos", "calendrier", "sourire", "excuse"],
+          /* 66 */ ["fromage", "escalier", "plaisir", "voiture", "centre", "fenêtre", "science", "chanson", "raison", "vacance", "façon", "poche", "activité", "environnement", "chaleur", "sourire", "avantage", "intelligence", "carotte", "gouvernement", "dictionnaire", "confiance", "salaire", "sentiment", "méthode", "travailleur", "reste", "tableau", "piscine", "repos", "côté", "explication", "chance", "calendrier", "excuse", "lecture", "boisson", "différence", "programme", "bouteille", "mémoire", "vaisselle", "importance", "effort"],
+          /* 67 */ ["centre", "mémoire", "poche", "sentiment", "chance", "chaleur", "fromage", "programme", "tableau", "explication", "piscine", "effort", "environnement", "sourire", "importance", "travailleur", "différence", "façon", "excuse", "fenêtre", "bouteille", "boisson", "repos", "vacance", "dictionnaire", "côté", "salaire", "reste", "calendrier", "avantage", "chanson", "confiance", "science", "plaisir", "méthode", "gouvernement", "raison", "intelligence", "carotte", "voiture", "activité", "lecture", "vaisselle", "escalier"],
+          /* 68 */ ["sourire", "voiture", "côté", "dictionnaire", "poche", "tableau", "programme", "chance", "différence", "piscine", "repos", "effort", "intelligence", "confiance", "gouvernement", "travailleur", "bouteille", "façon", "importance", "fromage", "lecture", "vaisselle", "chanson", "sentiment", "calendrier", "explication", "avantage", "excuse", "science", "méthode", "chaleur", "activité", "mémoire", "salaire", "raison", "fenêtre", "plaisir", "centre", "reste", "environnement", "vacance", "boisson", "carotte", "escalier"],
+          /* 69 */ ["excuse", "science", "vacance", "travailleur", "chaleur", "sourire", "fenêtre", "façon", "carotte", "dictionnaire", "repos", "tableau", "calendrier", "centre", "explication", "reste", "salaire", "fromage", "confiance", "plaisir", "programme", "escalier", "activité", "méthode", "piscine", "environnement", "côté", "poche", "importance", "raison", "effort", "mémoire", "avantage", "chanson", "sentiment", "intelligence", "gouvernement", "boisson", "différence", "bouteille", "lecture", "chance", "voiture", "vaisselle"],
+          /* 70 */ ["tableau", "effort", "piscine", "différence", "centre", "programme", "environnement", "travailleur", "explication", "repos", "vacance", "activité", "reste", "chance", "lecture", "poche", "confiance", "vaisselle", "carotte", "voiture", "raison", "chanson", "bouteille", "sentiment", "salaire", "méthode", "sourire", "importance", "avantage", "escalier", "calendrier", "boisson", "fenêtre", "dictionnaire", "science", "chaleur", "gouvernement", "façon", "intelligence", "excuse", "fromage", "mémoire", "plaisir", "côté"],
+          /* 71 */ ["chance", "voiture", "boisson", "programme", "effort", "sourire", "science", "raison", "explication", "intelligence", "vacance", "sentiment", "travailleur", "fenêtre", "reste", "centre", "chanson", "activité", "mémoire", "côté", "avantage", "méthode", "importance", "salaire", "fromage", "poche", "lecture", "calendrier", "chaleur", "dictionnaire", "bouteille", "piscine", "excuse", "façon", "différence", "environnement", "gouvernement", "escalier", "vaisselle", "confiance", "plaisir", "repos", "tableau", "carotte"],
+          /* 72 */ ["côté", "façon", "poche", "bouteille", "science", "intelligence", "raison", "tableau", "repos", "carotte", "voiture", "plaisir", "reste", "effort", "avantage", "calendrier", "sentiment", "piscine", "excuse", "confiance", "mémoire", "travailleur", "boisson", "chanson", "dictionnaire", "chance", "gouvernement", "fenêtre", "lecture", "explication", "salaire", "escalier", "centre", "fromage", "vacance", "importance", "programme", "activité", "environnement", "chaleur", "méthode", "sourire", "vaisselle", "différence"],
+          /* 73 */ ["voiture", "raison", "différence", "effort", "méthode", "boisson", "science", "côté", "gouvernement", "explication", "poche", "vaisselle", "centre", "activité", "fromage", "chaleur", "repos", "chance", "escalier", "sentiment", "dictionnaire", "travailleur", "environnement", "plaisir", "programme", "lecture", "piscine", "mémoire", "excuse", "importance", "calendrier", "tableau", "confiance", "chanson", "vacance", "bouteille", "fenêtre", "carotte", "façon", "reste", "intelligence", "salaire", "avantage", "sourire"],
+          /* 74 */ ["calendrier", "piscine", "science", "vacance", "côté", "tableau", "chaleur", "fenêtre", "chanson", "reste", "programme", "plaisir", "lecture", "repos", "environnement", "fromage", "boisson", "escalier", "intelligence", "centre", "travailleur", "confiance", "méthode", "gouvernement", "raison", "chance", "façon", "dictionnaire", "voiture", "sourire", "activité", "importance", "vaisselle", "salaire", "poche", "mémoire", "effort", "sentiment", "excuse", "explication", "carotte", "bouteille", "différence", "avantage"],
+          /* 75 */ ["confiance", "bouteille", "salaire", "chanson", "façon", "voiture", "science", "reste", "sentiment", "poche", "fromage", "mémoire", "effort", "programme", "importance", "centre", "fenêtre", "repos", "chaleur", "chance", "raison", "calendrier", "vacance", "environnement", "excuse", "tableau", "carotte", "méthode", "sourire", "explication", "activité", "avantage", "gouvernement", "intelligence", "différence", "dictionnaire", "vaisselle", "escalier", "lecture", "boisson", "plaisir", "piscine", "travailleur", "côté"],
+          /* 76 */ ["mémoire", "sourire", "chaleur", "travailleur", "effort", "côté", "chance", "intelligence", "centre", "confiance", "lecture", "différence", "fenêtre", "boisson", "sentiment", "environnement", "dictionnaire", "importance", "gouvernement", "programme", "tableau", "avantage", "excuse", "bouteille", "méthode", "vacance", "vaisselle", "chanson", "piscine", "raison", "science", "salaire", "activité", "reste", "repos", "plaisir", "explication", "façon", "escalier", "carotte", "fromage", "voiture", "calendrier", "poche"],
+          /* 77 */ ["intelligence", "chance", "raison", "gouvernement", "centre", "fromage", "environnement", "boisson", "vaisselle", "programme", "piscine", "lecture", "avantage", "excuse", "tableau", "vacance", "façon", "chaleur", "escalier", "méthode", "explication", "reste", "différence", "calendrier", "repos", "confiance", "voiture", "carotte", "salaire", "chanson", "bouteille", "dictionnaire", "côté", "activité", "travailleur", "mémoire", "poche", "effort", "sentiment", "plaisir", "fenêtre", "sourire", "science", "importance"],
+          /* 78 */ ["plaisir", "poche", "tableau", "boisson", "raison", "piscine", "côté", "méthode", "dictionnaire", "sentiment", "différence", "chance", "confiance", "chanson", "avantage", "explication", "excuse", "vacance", "façon", "science", "calendrier", "reste", "escalier", "fromage", "vaisselle", "sourire", "lecture", "chaleur", "centre", "importance", "activité", "voiture", "intelligence", "effort", "mémoire", "salaire", "travailleur", "bouteille", "gouvernement", "environnement", "carotte", "repos", "programme", "fenêtre"],
+          /* 79 */ ["carotte", "chanson", "science", "avantage", "plaisir", "escalier", "activité", "excuse", "côté", "chance", "fenêtre", "calendrier", "vacance", "reste", "piscine", "intelligence", "sentiment", "chaleur", "méthode", "dictionnaire", "importance", "explication", "fromage", "environnement", "tableau", "gouvernement", "travailleur", "lecture", "salaire", "bouteille", "vaisselle", "voiture", "centre", "effort", "confiance", "raison", "différence", "mémoire", "façon", "repos", "programme", "sourire", "boisson", "poche"],
+          /* 80 */ ["calendrier", "méthode", "boisson", "gouvernement", "intelligence", "poche", "vaisselle", "excuse", "explication", "plaisir", "programme", "importance", "salaire", "avantage", "carotte", "environnement", "lecture", "piscine", "voiture", "fromage", "travailleur", "confiance", "repos", "mémoire", "escalier", "raison", "dictionnaire", "façon", "tableau", "chanson", "chance", "sourire", "sentiment", "vacance", "science", "reste", "côté", "fenêtre", "effort", "différence", "bouteille", "chaleur", "centre", "activité"],
+          /* 81 */ ["chance", "plaisir", "escalier", "repos", "chaleur", "activité", "différence", "avantage", "piscine", "vacance", "salaire", "bouteille", "environnement", "méthode", "sentiment", "vaisselle", "façon", "confiance", "sourire", "tableau", "reste", "gouvernement", "centre", "lecture", "carotte", "chanson", "programme", "voiture", "science", "excuse", "importance", "mémoire", "calendrier", "boisson", "intelligence", "fromage", "poche", "dictionnaire", "raison", "effort", "travailleur", "fenêtre", "explication", "côté"],
+          /* 82 */ ["voiture", "façon", "mémoire", "dictionnaire", "différence", "chaleur", "bouteille", "explication", "activité", "vaisselle", "chanson", "poche", "tableau", "boisson", "excuse", "intelligence", "fenêtre", "repos", "sentiment", "centre", "avantage", "escalier", "environnement", "raison", "piscine", "salaire", "gouvernement", "plaisir", "programme", "reste", "science", "fromage", "confiance", "calendrier", "méthode", "carotte", "côté", "lecture", "vacance", "chance", "travailleur", "sourire", "importance", "effort"],
+          /* 83 */ ["explication", "dictionnaire", "calendrier", "tableau", "vacance", "différence", "excuse", "boisson", "méthode", "avantage", "gouvernement", "travailleur", "confiance", "salaire", "repos", "chance", "programme", "voiture", "sourire", "côté", "fenêtre", "mémoire", "escalier", "sentiment", "plaisir", "environnement", "chaleur", "science", "activité", "façon", "raison", "importance", "lecture", "carotte", "chanson", "reste", "centre", "vaisselle", "poche", "piscine", "intelligence", "fromage", "bouteille", "effort"],
+          /* 84 */ ["boisson", "effort", "chanson", "calendrier", "activité", "méthode", "chance", "fromage", "explication", "reste", "chaleur", "travailleur", "piscine", "tableau", "sentiment", "lecture", "excuse", "vaisselle", "mémoire", "science", "voiture", "avantage", "gouvernement", "fenêtre", "dictionnaire", "façon", "plaisir", "environnement", "sourire", "salaire", "différence", "vacance", "escalier", "importance", "centre", "bouteille", "poche", "repos", "carotte", "confiance", "intelligence", "programme", "raison", "côté"],
+          /* 85 */ ["sentiment", "salaire", "confiance", "reste", "activité", "lecture", "carotte", "vacance", "travailleur", "boisson", "avantage", "gouvernement", "sourire", "piscine", "poche", "escalier", "mémoire", "chaleur", "repos", "bouteille", "vaisselle", "chance", "plaisir", "voiture", "façon", "différence", "méthode", "programme", "tableau", "explication", "science", "raison", "effort", "excuse", "environnement", "fenêtre", "intelligence", "centre", "fromage", "chanson", "calendrier", "côté", "importance", "dictionnaire"],
+          /* 86 */ ["sourire", "vacance", "sentiment", "voiture", "chance", "environnement", "reste", "mémoire", "chanson", "fenêtre", "lecture", "boisson", "côté", "piscine", "intelligence", "travailleur", "plaisir", "différence", "vaisselle", "programme", "tableau", "centre", "bouteille", "raison", "fromage", "avantage", "effort", "importance", "carotte", "poche", "explication", "méthode", "calendrier", "escalier", "repos", "science", "façon", "gouvernement", "activité", "excuse", "dictionnaire", "salaire", "chaleur", "confiance"],
+          /* 87 */ ["plaisir", "côté", "chance", "façon", "effort", "importance", "calendrier", "activité", "vaisselle", "intelligence", "centre", "poche", "boisson", "salaire", "carotte", "mémoire", "raison", "avantage", "excuse", "voiture", "bouteille", "tableau", "explication", "confiance", "environnement", "science", "gouvernement", "escalier", "vacance", "repos", "fromage", "dictionnaire", "lecture", "sourire", "programme", "travailleur", "sentiment", "chaleur", "reste", "différence", "méthode", "piscine", "chanson", "fenêtre"],
+          /* 88 */ ["piscine", "repos", "chanson", "voiture", "confiance", "poche", "activité", "lecture", "dictionnaire", "raison", "chaleur", "excuse", "reste", "différence", "bouteille", "gouvernement", "sourire", "carotte", "boisson", "calendrier", "sentiment", "effort", "science", "salaire", "méthode", "façon", "côté", "chance", "vaisselle", "fenêtre", "fromage", "vacance", "mémoire", "centre", "plaisir", "explication", "importance", "avantage", "programme", "escalier", "environnement", "intelligence", "tableau", "travailleur"],
+          /* 89 */ ["raison", "sourire", "poche", "gouvernement", "plaisir", "escalier", "mémoire", "repos", "dictionnaire", "différence", "avantage", "excuse", "importance", "vaisselle", "chanson", "fromage", "voiture", "boisson", "bouteille", "activité", "programme", "tableau", "effort", "environnement", "carotte", "côté", "science", "chaleur", "lecture", "confiance", "explication", "piscine", "reste", "centre", "travailleur", "chance", "intelligence", "calendrier", "sentiment", "salaire", "méthode", "vacance", "fenêtre", "façon"],
+          /* 90 */ ["travailleur", "boisson", "chaleur", "programme", "fromage", "calendrier", "bouteille", "repos", "chance", "explication", "plaisir", "centre", "fenêtre", "escalier", "poche", "tableau", "environnement", "activité", "vacance", "chanson", "gouvernement", "intelligence", "science", "lecture", "façon", "côté", "vaisselle", "reste", "effort", "dictionnaire", "sourire", "méthode", "carotte", "importance", "excuse", "piscine", "voiture", "confiance", "sentiment", "raison", "mémoire", "salaire", "différence", "avantage"],
+          /* 91 */ ["calendrier", "environnement", "chance", "raison", "repos", "reste", "mémoire", "fenêtre", "intelligence", "explication", "science", "tableau", "méthode", "sentiment", "importance", "confiance", "activité", "côté", "piscine", "effort", "sourire", "poche", "façon", "avantage", "lecture", "fromage", "voiture", "programme", "vacance", "vaisselle", "gouvernement", "plaisir", "excuse", "bouteille", "boisson", "différence", "travailleur", "dictionnaire", "chaleur", "centre", "carotte", "salaire", "escalier", "chanson"],
+          /* 92 */ ["activité", "côté", "lecture", "science", "repos", "sentiment", "chance", "effort", "programme", "excuse", "vacance", "gouvernement", "piscine", "bouteille", "boisson", "sourire", "travailleur", "vaisselle", "poche", "environnement", "importance", "dictionnaire", "méthode", "plaisir", "carotte", "escalier", "centre", "mémoire", "calendrier", "salaire", "fromage", "fenêtre", "chaleur", "explication", "chanson", "intelligence", "voiture", "raison", "tableau", "différence", "confiance", "reste", "avantage", "façon"],
+          /* 93 */ ["différence", "lecture", "vaisselle", "côté", "travailleur", "tableau", "carotte", "escalier", "repos", "activité", "environnement", "centre", "intelligence", "voiture", "confiance", "fenêtre", "reste", "calendrier", "raison", "chance", "boisson", "excuse", "méthode", "dictionnaire", "sentiment", "bouteille", "sourire", "importance", "chaleur", "façon", "salaire", "gouvernement", "mémoire", "programme", "vacance", "effort", "fromage", "explication", "plaisir", "chanson", "piscine", "avantage", "science", "poche"],
+          /* 94 */ ["science", "fenêtre", "environnement", "travailleur", "explication", "centre", "salaire", "côté", "sourire", "excuse", "mémoire", "confiance", "calendrier", "bouteille", "carotte", "raison", "chanson", "gouvernement", "dictionnaire", "intelligence", "avantage", "lecture", "méthode", "différence", "programme", "vaisselle", "chaleur", "fromage", "sentiment", "escalier", "boisson", "voiture", "vacance", "effort", "reste", "plaisir", "façon", "tableau", "chance", "repos", "activité", "piscine", "poche", "importance"],
+          /* 95 */ ["tableau", "fromage", "chaleur", "environnement", "salaire", "fenêtre", "façon", "raison", "poche", "dictionnaire", "confiance", "gouvernement", "lecture", "méthode", "piscine", "reste", "activité", "mémoire", "carotte", "chanson", "sourire", "bouteille", "vacance", "sentiment", "travailleur", "différence", "voiture", "explication", "intelligence", "chance", "effort", "plaisir", "côté", "boisson", "science", "vaisselle", "escalier", "centre", "repos", "excuse", "importance", "avantage", "programme", "calendrier"],
+          /* 96 */ ["sentiment", "sourire", "salaire", "mémoire", "façon", "vacance", "centre", "programme", "piscine", "effort", "science", "excuse", "environnement", "méthode", "escalier", "poche", "côté", "travailleur", "dictionnaire", "intelligence", "vaisselle", "raison", "fromage", "importance", "fenêtre", "chaleur", "activité", "boisson", "gouvernement", "chance", "voiture", "bouteille", "repos", "différence", "carotte", "calendrier", "explication", "avantage", "chanson", "confiance", "tableau", "lecture", "reste", "plaisir"],
+          /* 97 */ ["chaleur", "chanson", "calendrier", "importance", "dictionnaire", "explication", "façon", "science", "carotte", "confiance", "sentiment", "raison", "fenêtre", "bouteille", "repos", "fromage", "tableau", "effort", "piscine", "excuse", "mémoire", "boisson", "avantage", "reste", "escalier", "activité", "vaisselle", "intelligence", "sourire", "centre", "environnement", "salaire", "côté", "différence", "poche", "travailleur", "vacance", "programme", "voiture", "lecture", "méthode", "chance", "plaisir", "gouvernement"],
+          /* 98 */ ["gouvernement", "confiance", "bouteille", "sourire", "méthode", "lecture", "activité", "mémoire", "salaire", "programme", "science", "centre", "fenêtre", "poche", "différence", "plaisir", "reste", "vaisselle", "repos", "boisson", "carotte", "explication", "effort", "chance", "dictionnaire", "raison", "environnement", "excuse", "chaleur", "travailleur", "vacance", "importance", "calendrier", "tableau", "escalier", "avantage", "voiture", "chanson", "intelligence", "fromage", "façon", "sentiment", "piscine", "côté"],
+          /* 99 */ ["différence", "escalier", "centre", "effort", "chanson", "tableau", "sourire", "science", "sentiment", "fenêtre", "vaisselle", "dictionnaire", "boisson", "raison", "lecture", "activité", "chaleur", "carotte", "plaisir", "intelligence", "calendrier", "programme", "confiance", "explication", "côté", "façon", "salaire", "vacance", "repos", "environnement", "méthode", "chance", "importance", "avantage", "poche", "fromage", "travailleur", "mémoire", "voiture", "bouteille", "piscine", "gouvernement", "excuse", "reste"],
+      ];
+
+      const jsPsych = initJsPsych({
+        on_finish: () => {
+          const display = jsPsych.getDisplayElement();
+          display.innerHTML = `
+            <div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h3 style="color: #28a745;">
+                Vos données ont été enregistrées avec succès !
+              </h3>
+              <p style="margin: 20px 0;">
+                Voici le code à copier-coller sur Prolific pour votre payement : <strong>C1NOA6BK</strong>
+              </p>
+              <p style="font-size: 0.9em; color: #6c757d;">
+                Vous pourrez ensuite fermer cette fenêtre (ainsi que celle de l’environnement virtuel le cas échéant).
+              </p>
+            </div>`;
+        }
+      });
+
+      var timeline = [];
+      
+      const preload = {
+          type: jsPsychPreload,
+          images: ['planflou.png']
+      };
+      timeline.push(preload);
+
+      var fullscreen = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: "L'expérience passera en mode plein écran lorsque vous appuierez sur le bouton ci-dessous<br><br><br>", //Translation of default aka english value
+        button_label: "Continuer" //in English, "Continue" by default
+      };
+      timeline.push(fullscreen);
+
+
+      var welcome = {
+        type: jsPsychHtmlKeyboardResponse,       
+        stimulus: "Bienvenue dans l'expérience ! Appuyez sur n'importe quelle touche pour commencer"
+      };
+      timeline.push(welcome);
+
+window.blockCount = 0;
+window.shouldStop = false;
+window.shouldSkipTests = false;
+window.foundWords = []; 
+window.temporalSeqCorrectCounter = 0;
+window.temporalRoomCorrectCounter = 0;
+window.spatialEgoCorrectCounter = 0;
+window.spatialAlloCorrectCounter = 0;
+window.temporalCorrectCounter = 0;
+window.spatialCorrectCounter = 0;
+window.objectDetailCorrectCounter = 0;
+window.gender = 0
+window.age = 0
+window.perm = 0
+window.currentPerm = false
+
+
+
+      var participant_info = {
+        type: jsPsychSurveyText,
+        questions: [
+          {
+            prompt: "Quel est votre genre ?",
+            placeholder: "_ _ _ _ _",
+            name: "Genre",
+            required: true,
+          },
+          {
+            prompt: "Quel est votre âge (indiquez seulement un nombre) ?",
+            placeholder: "00",
+            name: "Age",
+            required: true,
+          },
+          {
+            prompt: "Quels sont les deux derniers chiffres de votre numéro de téléphone ?",
+            placeholder: "00",
+            name: "Permutation",
+            required: true,
+          },
+        ],
+        button_label: "Continuer",
+        on_finish: function(data) {
+    const genreResponse = data.response.Genre.toLowerCase().trim();
+    
+    const termesMasculins = ["homme", "masculin", "male", "garçon", "monsieur", "m", "h"];
+    const termesFeminins = ["femme", "féminin", "female", "fille", "madame", "mademoiselle", "f"];
+    
+    let minDistanceMasculin = Infinity;
+    let minDistanceFeminin = Infinity;
+    let termeMasculinLePlusProche = "";
+    let termeFemininLePlusProche = "";
+    
+    for (const terme of termesMasculins) {
+      const distance = levenshtein(genreResponse, terme);
+      if (distance < minDistanceMasculin) {
+        minDistanceMasculin = distance;
+        termeMasculinLePlusProche = terme;
+      }
+    }
+    
+    for (const terme of termesFeminins) {
+      const distance = levenshtein(genreResponse, terme);
+      if (distance < minDistanceFeminin) {
+        minDistanceFeminin = distance;
+        termeFemininLePlusProche = terme;
+      }
+    }
+
+    const SEUIL_DISTANCE = 2;
+    
+    let genreDetecte;
+    if (minDistanceMasculin <= SEUIL_DISTANCE && minDistanceMasculin < minDistanceFeminin) {
+      genreDetecte = "Homme";
+    } else if (minDistanceFeminin <= SEUIL_DISTANCE && minDistanceFeminin < minDistanceMasculin) {
+      genreDetecte = "Femme";
+    } else {
+      genreDetecte = "Autre";
+    }
+    
+    data.genreDetecte = genreDetecte;
+    data.age_numeric = parseInt(data.response.Age);
+    data.permutation_numeric = parseInt(data.response.Permutation);
+    window.gender = genreDetecte;
+    window.age = parseInt(data.response.Age);
+    window.perm = parseInt(data.response.Permutation)
+  }
+};
+      timeline.push(participant_info);
+
+      var general_instructions = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "<p><b>Jeu d'association</b></p><br>" +
+        "<p>Vous allez maintenant participer à un jeu d'association où l'objectif est de restituer le plus de mots vus dans l'environnement virtuel.</p><br>" +
+        "<p>Pour chaque mot rappelé, des questions sur le contexte environnemental seront posées. Ces questions porteront sur des détails comme l'emplacement ou le moment où le mot est apparu.</p><br>" +
+        "<p>Prenez simplement le temps de vous remémorer les mots à votre rythme. Si un mot ne vous revient pas précisément, vous pouvez tenter une orthographe approximative.</p><br>" +
+        "<p>Lorsque vous ne vous souvenez plus d'aucun mot, vous pourrez l'indiquer et passer à la suite de l'expérience.</p><br>",
+        choices: ["Continuer"],
+        data: {screen: "general_instructions"},
+      };
+      //timeline.push(general_instructions);
+
+function levenshtein(a, b) {
+    const matrix = [];
+    for(let i = 0; i <= b.length; i++) matrix[i] = [i];
+    for(let j = 0; j <= a.length; j++) matrix[0][j] = j;
+
+    for(let i = 1; i <= b.length; i++) {
+        for(let j = 1; j <= a.length; j++) {
+            const cost = a[j-1] === b[i-1] ? 0 : 1;
+            matrix[i][j] = Math.min(
+                matrix[i-1][j] + 1,
+                matrix[i][j-1] + 1,
+                matrix[i-1][j-1] + cost
+            );
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
+
+const permCall = {
+  type: jsPsychCallFunction,
+  func: () => {
+    const phoneDigits = window.perm;
+    window.currentPerm = permutations[phoneDigits % 100];
+  }
+};
+timeline.push(permCall);
+
+const freeRecallTrial = {
+  type: jsPsychSurveyText,
+  questions: [{
+    prompt: function() {
+      let promptText = "";
+      
+      if (window.shouldSkipTests) {
+        promptText += `
+          <div style="padding: 10px; margin-bottom: 15px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; color: #721c24;">
+            <p><i>Ce qui a été entré est un peu trop proche d'un mot précédemment entré ou n'a pas été reconnu<i></p>
+            <p>Veuillez essayer de vous souvenir d'un autre mot ou de l'écrire autrement.</p>
+          </div>
+        `;
+      }
+      
+      promptText += `<p><strong>Écrivez un (1) des mots affichés lors de votre navigation dont vous vous souvenez :</strong></p>` +
+      "<p>L'orthographe exacte n'est pas requise. Écrivez simplement le mot comme vous vous en souvenez.<p>";
+      
+      if (window.blockCount >= 1) {
+        promptText += `
+          <p style="font-size:0.85em; color:#555; margin-bottom:10px;">
+            Si vous ne vous souvenez plus d'aucun mot, écrivez "<strong>STOP</strong>" dans le champ ci-dessous.
+            <br><i>Cela mettra fin prématurément à l'expérience<i>
+          </p>`;
+      }
+      
+      return promptText;
+    },
+    name: "free_recall",
+  }],
+  button_label: "Continuer",
+  on_finish: data => {
+    const answer = data.response.free_recall.trim().toLowerCase();
+    
+    if (answer === "stop") {
+      window.shouldStop = true;
+      data.did_stop = true;
+      return;
+    }
+    
+    data.did_stop = false;
+    
+    let minDist = Infinity, closestIdx = -1, closestWord = "";
+    window.currentPerm.forEach((w, i) => {
+      const d = levenshtein(answer, w.toLowerCase());
+      if (d < minDist) {
+        minDist = d; closestIdx = i; closestWord = w;
+      }
+    });
+    
+    data.correct_word = closestWord;
+    data.levenshtein = minDist;
+    data.perm_position = closestIdx;
+    
+    if (minDist > 5) {
+      data.word_recognized = false;
+      data.skip_reason = "distance_too_large";
+      
+      window.shouldSkipTests = true;
+    } 
+    else if (window.foundWords.includes(closestWord)) {
+      data.word_recognized = true;
+      data.word_already_found = true;
+      data.skip_reason = "word_already_found";
+      
+      window.shouldSkipTests = true;
+    } 
+    else {
+      data.word_recognized = true;
+      data.word_already_found = false;
+      data.skip_reason = null;
+      
+      window.foundWords.push(closestWord);
+      
+      window.correctWord = closestWord;
+      window.permPosition = closestIdx;
+      window.shouldSkipTests = false;
+    }
+  }
+};
+//timeline.push(freeRecallTrial);
+
+const temporalseqBindingTest = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+            prompt: "Lors de votre exploration, ce mot est-il apparu plutôt au début ou à la fin du parcours ?",
+            name: "temporal_sequence_response",
+            options: ["Première moitié", "Seconde moitié", "<i>Je ne sais pas<i>"],
+            required: true
+        }
+    ],
+    button_label: "Continuer",
+    on_finish: (data) => {
+        const correctTemporalSeq = window.permPosition < 22 ? "Première moitié" : "Seconde moitié";
+        data.temporal_seq_correct = data.response.temporal_sequence_response === correctTemporalSeq;
+        data.temporal_seq_correct_answer = correctTemporalSeq;
+        data.temporal_seq_skipped = data.response.temporal_seq_response === "<i>Je ne sais pas<i>";
+    if (data.temporal_seq_correct) {
+      window.temporalSeqCorrectCounter++;
+    }
+    data.cumulative_temporal_seq_correct = window.temporalSeqCorrectCounter;
+
+    }
+};
+
+const temporalroomBindingTest = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+            prompt: "Dans quelle pièce avez-vous vu ce mot ?",
+            name: "temporal_room_response",
+            options: ["Cuisine", "Salon", "Chambre", "Salle de bain", "<i>Je ne sais pas<i>"],
+            required: true
+        }
+    ],
+    button_label: "Continuer",
+    on_finish: (data) => {
+
+        const currentIndex = window.currentPerm.indexOf(window.correctWord);
+        let correctRoom = "";
+        if(currentIndex < 11) correctRoom = "Cuisine";
+        else if(currentIndex < 22) correctRoom = "Salon";
+        else if(currentIndex < 33) correctRoom = "Chambre";
+        else correctRoom = "Salle de bain";
+        
+    const response = data.response.temporal_room_response;
+    data.room_correct = (response === correctRoom);
+    data.room_correct_answer = correctRoom;
+    data.room_skipped = (response === "<i>Je ne sais pas<i>");
+    if (data.room_correct) {
+      window.temporalRoomCorrectCounter++;
+    }
+    data.cumulative_room_correct = window.temporalRoomCorrectCounter;
+    }
+};
+//timeline.push(temporalBindingTest);
+
+
+window.spatialPosition = ["face","face","droite","droite","droite","droite","droite","face","face","face","droite","gauche","face","face","face","gauche","face","face","gauche","gauche","face","face","gauche","gauche","gauche","gauche","face","gauche","gauche","face","face","face","droite","face","droite","droite","face","gauche","gauche","gauche","face","face","face","droite"];
+
+const spatialBindingTest = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+            prompt: "Le mot était-il positionné à gauche, en face ou à droite du corps de l'avatar ?",
+            name: "spatial_response",
+            options: ["À gauche", "En face", "À droite", "<i>Je ne sais pas<i>"],
+            required: true
+        }
+    ],
+    button_label: "Continuer",    
+    on_finish: (data) => {
+        const correctPos = window.spatialPosition[window.permPosition];
+        
+        const correctAnswer = {
+            "gauche": "À gauche",
+            "droite": "À droite",
+            "face": "En face"
+        }[correctPos];
+        
+        data.spatial_correct = data.response.spatial_response === correctAnswer;
+        data.spatial_correct_answer = correctAnswer;
+        data.spatial_skipped = data.response.spatial_response === "<i>Je ne sais pas<i>";
+        if (data.spatial_correct) {
+          window.spatialEgoCorrectCounter++;
+        }
+        data.cumulative_spatialego_correct = window.spatialEgoCorrectCounter;
+
+        
+    }
+};
+//timeline.push(spatialBindingTest);
+
+const spatialAlloBindingTest = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function() {
+    return `<div style="position: relative; width: 400px; margin: 0 auto;">
+      <p>Sur cette carte floutée vue du dessus de l'environnement virtuel, cliquez à l'endroit où vous pensez avoir vu apparaître le mot.</p>
+      <div id="image-container" style="position: relative; width: 400px; height: 364px;">
+        <img src="planflou.png" style="width: 100%; height: 100%;" id="clickable-image">
+        <div id="marker" style="position: absolute; width: 10px; height: 10px; border-radius: 50%; background-color: red; transform: translate(-50%, -50%); display: none;"></div>
+      </div>
+      <button id="continue-button" style="margin-top: 10px; padding: 5px 10px; display: none;">Continuer</button>
+    </div>`;
+  },
+  choices: "NO_KEYS",
+  on_load: function() {
+    const img = document.getElementById('clickable-image');
+    const marker = document.getElementById('marker');
+    const continueBtn = document.getElementById('continue-button');
+
+    if (!img || !continueBtn) {
+      console.error("Elements not found");
+      return;
+    }
+    
+    img.onerror = function() {
+      img.style.display = "none";
+      const container = document.getElementById('image-container');
+      container.innerHTML += '<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f0f0f0;">Image non disponible</div>';
+      continueBtn.style.display = 'block';
+    };
+    
+    let clickX, clickY;
+    
+    img.addEventListener('click', function(e) {
+      const rect = img.getBoundingClientRect();
+      clickX = e.clientX - rect.left;
+      clickY = e.clientY - rect.top;
+      
+      marker.style.left = clickX + 'px';
+      marker.style.top = clickY + 'px';
+      marker.style.display = 'block';
+      
+      continueBtn.style.display = 'block';
+    });
+    
+    continueBtn.addEventListener('click', function() {
+      const trial_data = {
+        click_x: clickX,
+        click_y: clickY
+      };
+      
+      jsPsych.finishTrial(trial_data);
+    });
+  },
+  data: function() {
+    return {
+      task: 'spatial_binding_test',
+      permPosition: window.permPosition || -1  
+    };
+  },
+  on_finish: (data) => {
+    if (data.click_x !== undefined && data.click_y !== undefined) {
+        const scaleX = 1, scaleY = 1;
+        const scaledX = data.click_x * scaleX;
+        const scaledY = data.click_y * scaleY;
+        
+        const objPositions = [
+          {x: 60,  y: 18},  
+          {x: 44,  y: 40}, 
+          {x: 20,  y: 90},
+          {x: 18,  y:110},
+          {x: 18,  y:130},
+          {x: 14,  y:144},
+          {x: 14,  y:170},
+          {x: 10,  y:200},
+          {x: 66,  y:203},
+          {x:117,  y:187},
+          {x:127,  y:154}, 
+          {x:183,  y: 83}, //12
+          {x:240,  y: 30},
+          {x:305,  y:106},
+          {x:268,  y: 68},
+          {x:300,  y:  8},
+          {x:364,  y: 42},
+          {x:350,  y:140},
+          {x:353,  y:172},
+          {x:343,  y:203},
+          {x:250,  y:174},
+          {x:268,  y:208}, 
+          {x:353,  y:241}, //23
+          {x:351,  y:275},
+          {x:343,  y:285},
+          {x:386,  y:297},
+          {x:348,  y:329},
+          {x:301,  y:321},
+          {x:280,  y:344},
+          {x:277,  y:319},
+          {x:259,  y:303}, 
+          {x:268,  y:231},
+          {x:273,  y:252},
+          {x:191,  y:289}, //34
+          {x:239,  y:245},
+          {x:237,  y:221},
+          {x:132,  y:237},
+          {x:151,  y:214},
+          {x:160,  y:195},
+          {x:151,  y:176},
+          {x:172,  y:150},
+          {x:191,  y:155},
+          {x:211,  y:151},
+          {x:213,  y:187}   
+        ];
+        
+        const calculateDistance = function(point1, point2) {
+          return Math.sqrt(
+            Math.pow(point1.x - point2.x, 2) + 
+            Math.pow(point1.y - point2.y, 2)
+          );
+        };
+        
+        const permPosition = window.permPosition !== undefined ? window.permPosition : -1;
+        const correctPos = permPosition >= 0 && permPosition < objPositions.length 
+          ? objPositions[permPosition] 
+          : {x: 0, y: 0};
+        
+        const distance = calculateDistance({x: scaledX, y: scaledY}, correctPos);
+        
+        
+        const clickPoint = { x: scaledX, y: scaledY };
+        let best = { idx: -1, dist: Infinity };
+        objPositions.forEach((pt, i) => {
+          const d = calculateDistance(clickPoint, pt);
+          if (d < best.dist) {
+            best.idx = i;
+            best.dist = d;
+          }
+        });
+        
+        data.scaled_x = scaledX;
+        data.scaled_y = scaledY;
+        data.distance_from_target = distance;
+        data.nearest_object_index = best.idx;
+        data.nearest_object_distance = best.dist;
+        data.correct_object_index = permPosition;
+        data.is_nearest_correct = (best.idx === permPosition);
+        if (data.is_nearest_correct) {
+          window.spatialAlloCorrectCounter++;
+        }
+        data.cumulative_spatialallo_correct = window.spatialAlloCorrectCounter;
+    } 
+  }
+};
+
+
+//timeline.push(spatialAlloBindingTest);
+
+
+const objects = [
+    { 
+        name: "porte-manteau",
+        synonyms: ["portemanteau", "patère", "crochet"]
+    },
+    {
+        name: "miroir",
+        synonyms: ["glace", "psyché", "miroir mural"]
+    },
+    {
+        name: "four",
+        synonyms: ["four traditionnel", "four électrique", "cuisinière"]
+    },
+    {
+        name: "machine à café",
+        synonyms: ["cafetière", "expresso", "percolateur"]
+    },
+    {
+        name: "plante",
+        synonyms: ["fleur", "végétal", "plante verte"]
+    },
+    {
+        name: "couteau",
+        synonyms: ["couteau de cuisine", "lame", "couteau à découper"]
+    },
+    {
+        name: "micro-onde",
+        synonyms: ["four micro-ondes", "microondes", "four à micro-ondes"]
+    },
+    {
+        name: "étagère",
+        synonyms: ["rayonnage", "tablette", "meuble étagère"]
+    },
+    {
+        name: "frigo",
+        synonyms: ["réfrigérateur", "congélateur", "frigidaire"]
+    },
+    {
+        name: "table",
+        synonyms: ["plan de travail", "table à manger", "table de cuisine"]
+    },
+    {
+        name: "tabouret",
+        synonyms: ["siège", "marchepied", "pouf"]
+    },
+    {
+        name: "étendage",
+        synonyms: ["séchoir", "corde à linge", "tancarville"]
+    },
+    {
+        name: "canapé",
+        synonyms: ["sofa", "divan", "banquette"]
+    },
+    {
+        name: "table basse",
+        synonyms: ["desserte", "meuble salon", "table de salon"]
+    },
+    {
+        name: "pouf",
+        synonyms: ["housse", "coussin", "ottomane"]
+    },
+    {
+        name: "télévision",
+        synonyms: ["TV", "écran plat", "téléviseur"]
+    },
+    {
+        name: "jeu d'échecs",
+        synonyms: ["échiquier", "pièces d'échecs", "chess"]
+    },
+    {
+        name: "ventilateur",
+        synonyms: ["ventilo", "brumisateur", "climatiseur"]
+    },
+    {
+        name: "bibliothèque",
+        synonyms: ["étagère murale", "rayonnage", "meuble livres"]
+    },
+    {
+        name: "vase",
+        synonyms: ["pot", "récipient", "urne"]
+    },
+    {
+        name: "billard",
+        synonyms: ["table de billard", "queue de billard", "billard américain"]
+    },
+    {
+        name: "fléchette",
+        synonyms: ["dard", "cible", "fléchette de jeu"]
+    },
+    {
+        name: "penderie",
+        synonyms: ["dressing", "armoire", "garde-robe"]
+    },
+    {
+        name: "trotinette",
+        synonyms: ["scooter", "patinette", "trottinette électrique"]
+    },
+    {
+        name: "ballon",
+        synonyms: ["ballon de football", "balle", "sphère"]
+    },
+    {
+        name: "lampe",
+        synonyms: ["luminaires", "applique", "abat-jour"]
+    },
+    {
+        name: "lit",
+        synonyms: ["matelas", "sommeil", "couchette"]
+    },
+    {
+        name: "poubelle",
+        synonyms: ["corbeille", "bac", "poubelle tri sélectif"]
+    },
+    {
+        name: "bureau",
+        synonyms: ["espace de travail", "plan de travail", "secrétaire"]
+    },
+    {
+        name: "chaise",
+        synonyms: ["siège", "fauteuil", "tabouret"]
+    },
+    {
+        name: "sac",
+        synonyms: ["sac à dos", "besace", "cartable"]
+    },
+    {
+        name: "ourson",
+        synonyms: ["peluche", "nounours", "teddy bear"]
+    },
+    {
+        name: "brosse à cheveux",
+        synonyms: ["peigne", "démêloir", "brosse coiffage"]
+    },
+    {
+        name: "baignoire",
+        synonyms: ["baignoire balnéo", "salle de bain", "bain tourbillon"]
+    },
+    {
+        name: "bac à linge",
+        synonyms: ["panier à linge", "sac linge sale", "corbeille linge"]
+    },
+    {
+        name: "armoire à pharmacie",
+        synonyms: ["pharmacie", "boîte médicaments", "trousse secours"]
+    },
+    {
+        name: "machine à laver",
+        synonyms: ["lave-linge", "laveuse", "essoreuse"]
+    },
+    {
+        name: "brosse à chiotte",
+        synonyms: ["brosse WC", "nettoyeur toilette", "brosse sanitaires"]
+    },
+    {
+        name: "toilette",
+        synonyms: ["WC", "cabinets", "sanitaires"]
+    },
+    {
+        name: "papier toilette",
+        synonyms: ["PQ", "rouleau papier", "papier hygiénique"]
+    },
+    {
+        name: "brosse à dents",
+        synonyms: ["brosse dentaire", "brossage", "brosse électrique"]
+    },
+    {
+        name: "vasque",
+        synonyms: ["lavabo", "évier", "meuble vasque"]
+    },
+    {
+        name: "savon",
+        synonyms: ["pain de savon", "déodorant", "gel douche"]
+    },
+    {
+        name: "serviette",
+        synonyms: ["linge de bain", "torchon", "peignoir"]
+    }
+];
+
+const objectAssociationTrial = {
+    type: jsPsychSurveyText,
+    questions: [{
+        prompt: "Quel objet ou élément de l'environnement virtuel était le plus proche de ce mot lorsqu'il est apparu ?",
+        name: "object_response",
+        placeholder: ""
+    }],
+    on_finish: (data) => {
+        const userInput = data.response.object_response.toLowerCase().trim();
+        
+        const allVariants = objects.flatMap(obj => 
+            [obj.name, ...obj.synonyms].map(variant => ({
+                object: obj.name,
+                variant: variant.toLowerCase(),
+                distance: levenshtein(userInput, variant.toLowerCase())
+            }))
+        );
+
+        const topMatches = allVariants
+            .sort((a, b) => a.distance - b.distance)
+            .slice(0, 3); 
+
+        const correctObject = objects[window.permPosition % objects.length].name;
+        const bestMatch = topMatches[0];
+        
+        data.object_correct = bestMatch.object === correctObject;
+        data.object_expected = correctObject;
+        data.object_entered = bestMatch.variant;
+        data.object_distance = bestMatch.distance;
+        data.object_top3 = topMatches;
+        if (data.object_correct) {
+          window.objectDetailCorrectCounter++;
+        }
+        data.cumulative_detail_correct = window.objectDetailCorrectCounter;
+    }
+};
+//timeline.push(objectAssociationTrial);
+
+
+// Kempenaers et al., 2017 for the French version of the AQ
+      var AQ_instructions = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "<p>Vous allez maintenant être confronté(e) à une liste de situations. Veuillez lire chacune d’elles très attentivement et précisez dans quelle mesure vous êtes d’accord ou pas.</p><br><br>"+
+                "<p><i>Conseils : Examinez attentivement les échelles de réponse pour chaque question et n'oubliez pas de faire défiler vers le bas pour voir tous les énoncés avant de soumettre vos réponses.<i></p>",
+        choices: ["Continuer"],
+        data: {screen: "AQ_instructions"},
+      };
+      //timeline.push(AQ_instructions);
+
+      var AQlikert_scale = [
+        "Tout à fait d'accord",
+        "Plutôt d'accord",
+        "Plutôt pas d'accord",
+        "Pas du tout d'accord",
+      ];
+
+      var AQ = {
+        type: jsPsychSurveyLikert,
+        data: {screen: "AQ"},
+        questions: [
+            {prompt: "Je préfère réaliser des activités avec d’autres personnes plutôt que seul(e).", name: 'N1AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je préfère tout faire continuellement de la même manière.", name: '2AF', labels: AQlikert_scale, required: true},
+            {prompt: "Quand j’essaye d’imaginer quelque chose, il est très facile de m’en représenter une image mentalement.", name: 'N3AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis fréquemment tellement absorbé(e) par une chose que je perds tout le reste de vue.", name: '4AF', labels: AQlikert_scale, required: true},
+            {prompt: "Mon attention est souvent attirée par des bruits discrets que les autres ne remarquent pas.", name: '5AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je fais habituellement attention aux numéros de plaques d’immatriculation ou à d’autres types d’informations de ce genre.", name: '6AD', labels: AQlikert_scale, required: true},
+            {prompt: "Les gens me disent souvent que ce que j’ai dit était impoli, même quand je pense moi que c’était poli.", name: '7AC', labels: AQlikert_scale, required: true},
+            {prompt: "Quand je lis une histoire, je peux facilement imaginer à quoi les personnages pourraient ressembler.", name: 'N8AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis fasciné(e) par les dates.", name: '9AD', labels: AQlikert_scale, required: true},
+            {prompt: "Au sein d’un groupe, je peux facilement suivre les conversations de plusieurs personnes à la fois.", name: 'N10AF', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve les situations de la vie en société faciles.", name: 'N11AS', labels: AQlikert_scale, required: true},
+            {prompt: "J’ai tendance à remarquer certains détails que les autres ne voient pas.", name: '12AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je préférerais aller dans une bibliothèque plutôt qu’à une fête.", name: '13AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve facile d’inventer des histoires. ", name: 'N14AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis plus facilement attiré(e) par les gens que par les objets.", name: 'N15AS', labels: AQlikert_scale, required: true},
+            {prompt: "J’ai tendance à avoir des centres d’intérêt très importants. Je me tracasse lorsque je ne peux m’y consacrer.", name: '16AF', labels: AQlikert_scale, required: true},
+            {prompt: "J’apprécie le bavardage en société.", name: 'N17AC', labels: AQlikert_scale, required: true},
+            {prompt: "Quand je parle, il n’est pas toujours facile pour les autres de placer un mot.", name: '18AC', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis fasciné(e) par les chiffres.", name: '19AD', labels: AQlikert_scale, required: true},
+            {prompt: "Quand je lis une histoire, je trouve qu’il est difficile de me représenter les intentions des personnages.", name: '20AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je n’aime pas particulièrement lire des romans.", name: '21AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est difficile de se faire de nouveaux amis.", name: '22AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je remarque sans cesse des schémas réguliers dans les choses qui m’entourent.", name: '23AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je préférerais aller au théâtre plutôt qu’au musée.", name: 'N24AI', labels: AQlikert_scale, required: true},
+            {prompt: "Cela ne me dérange pas si mes habitudes quotidiennes sont perturbées.", name: 'N25AF', labels: AQlikert_scale, required: true},
+            {prompt: "Je remarque souvent que je ne sais pas comment entretenir une conversation.", name: '26AC', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est facile de « lire entre les lignes » lorsque quelqu’un me parle.", name: 'N27AC', labels: AQlikert_scale, required: true},
+            {prompt: "Je me concentre habituellement plus sur l’ensemble d’une image que sur les petits détails de celle-ci.", name: 'N28AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je ne suis pas très doué(e) pour me souvenir des numéros de téléphone.", name: 'N29AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je ne remarque habituellement pas les petits changements dans une situation ou dans l’apparence de quelqu’un. ", name: 'N30AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je sais m’en rendre compte quand mon interlocuteur s’ennuie.", name: 'N31AC', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est facile de faire plus d’une chose à la fois.", name: 'N32AF', labels: AQlikert_scale, required: true},
+            {prompt: "Quand je parle au téléphone, je ne suis pas sûr(e) de savoir quand c’est à mon tour de parler.", name: '33AC', labels: AQlikert_scale, required: true},
+            {prompt: "J’aime faire les choses de manière spontanée.", name: 'N34AF', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis souvent le(la) dernier(ère) à comprendre le sens d’une blague.", name: '35AC', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est facile de décoder ce que les autres pensent ou ressentent juste en regardant leur visage.", name: 'N36AS', labels: AQlikert_scale, required: true},
+            {prompt: "Si je suis interrompu(e), je peux facilement revenir à ce que j’étais en train de faire.", name: 'N37AF', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis doué(e) pour le bavardage en société.", name: 'N38AC', labels: AQlikert_scale, required: true},
+            {prompt: "Les gens me disent souvent que je répète continuellement les mêmes choses.", name: '39AC', labels: AQlikert_scale, required: true},
+            {prompt: "Quand j’étais enfant, j’aimais habituellement jouer à des jeux de rôle avec les autres.", name: 'N40AI', labels: AQlikert_scale, required: true},
+            {prompt: "J’aime collectionner des informations sur des catégories de choses (types de voitures, d’oiseaux, de trains, de plantes, ...).", name: '41AI', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est difficile de s’imaginer dans la peau d’un autre.", name: '42AI', labels: AQlikert_scale, required: true},
+            {prompt: "J’aime planifier avec soin toute activité à laquelle je participe.", name: '43AF', labels: AQlikert_scale, required: true},
+            {prompt: "J’aime les événements sociaux.", name: 'N44AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est difficile de décoder les intentions des autres.", name: '45AS', labels: AQlikert_scale, required: true},
+            {prompt: "Les nouvelles situations me rendent anxieux(se).", name: '46AF', labels: AQlikert_scale, required: true},
+            {prompt: "J’aime rencontrer de nouvelles personnes.", name: 'N47AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je suis une personne qui a le sens de la diplomatie.", name: 'N48AS', labels: AQlikert_scale, required: true},
+            {prompt: "Je ne suis pas très doué(e) pour me souvenir des dates de naissance des gens.", name: 'N49AD', labels: AQlikert_scale, required: true},
+            {prompt: "Je trouve qu’il est très facile de jouer à des jeux de rôle avec des enfants.", name: 'N50AI', labels: AQlikert_scale, required: true},
+            ],      
+        randomize_question_order: true, 
+        button_label: "Continuer",
+      };
+      //timeline.push(AQ);
+
+//Loas et al., 1995 for the French version of the TAS-20      
+      var TAS_instructions = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "<p>Après avoir cliqué sur 'Continuer', indiquez à quel point vous êtes en accord ou en désaccord avec chacune des affirmations qui vous seront exposées.</p><br><br>"+
+                "<p><i>Conseils : Examinez attentivement les échelles de réponse pour chaque question et n'oubliez pas de faire défiler vers le bas pour voir tous les énoncés avant de soumettre vos réponses.<i></p>",
+        choices: ["Continuer"],
+        data: {screen: "TAS_instructions"},
+      };
+      //timeline.push(TAS_instructions);
+
+      var TASlikert_scale = [
+        "Désaccord complet",
+        "Désaccord relatif",
+        "Ni accord ni désaccord",
+        "Accord relatif",
+        "Accord complet",
+      ];
+
+      var TAS = {
+        type: jsPsychSurveyLikert,
+        data: {screen: "TAS"},
+        questions: [
+            {prompt: "Souvent, je ne vois pas très clair dans mes sentiments.", name: '1TI', labels: TASlikert_scale, required: true},
+            {prompt: "J'ai du mal à trouver les mots qui correspondent bien à mes sentiments.", name: '2TD', labels: TASlikert_scale, required: true},
+            {prompt: "J’éprouve des sensations physiques que les médecins eux-mêmes ne comprennent pas.", name: '3TI', labels: TASlikert_scale, required: true},
+            {prompt: "J’arrive facilement à décrire mes sentiments.", name: 'N4TD', labels: TASlikert_scale, required: true},
+            {prompt: "Je préfère analyser les problèmes plutôt que de me contenter de les décrire.", name: 'N5TO', labels: TASlikert_scale, required: true},
+            {prompt: "Quand je suis bouleversé(e), je ne sais pas si je suis triste, effrayé(e) ou en colère.", name: '6TI', labels: TASlikert_scale, required: true},
+            {prompt: "Je suis souvent intrigué(e) par des sensations au niveau de mon corps.", name: '7TI', labels: TASlikert_scale, required: true},
+            {prompt: "Je préfère simplement laisser les choses se produire plutôt que de comprendre pourquoi elles ont pris ce tour.", name: '8TO', labels: TASlikert_scale, required: true},
+            {prompt: "J’ai des sentiments que je ne suis guère capable d'identifier.", name: '9TI', labels: TASlikert_scale, required: true},
+            {prompt: "Être conscient de ses émotions est essentiel.", name: 'N10TO', labels: TASlikert_scale, required: true},
+            {prompt: "Je trouve difficile de décrire mes sentiments sur les gens.", name: '11TD', labels: TASlikert_scale, required: true},
+            {prompt: "On me dit de décrire davantage ce que je ressens.", name: '12TD', labels: TASlikert_scale, required: true},
+            {prompt: "Je ne sais pas ce qui se passe à l’intérieur de moi.", name: '13TI', labels: TASlikert_scale, required: true},
+            {prompt: "Bien souvent, je ne sais pas pourquoi je suis en colère.", name: '14TI', labels: TASlikert_scale, required: true},
+            {prompt: "Je préfère parler aux gens de leurs activités quotidiennes plutôt que de leurs sentiments.", name: '15TO', labels: TASlikert_scale, required: true},
+            {prompt: "Je préfère regarder des émissions de variété plutôt que des films dramatiques.", name: '16TO', labels: TASlikert_scale, required: true},
+            {prompt: "Il m’est difficile de révéler mes sentiments intimes même à mes amis très proches.", name: '17TD', labels: TASlikert_scale, required: true},
+            {prompt: "Je peux me sentir proche de quelqu’un même pendant les moments de silence.", name: 'N18TO', labels: TASlikert_scale, required: true},
+            {prompt: "Je trouve utile d’analyser mes sentiments pour résoudre mes problèmes personnels.", name: 'N19TO', labels: TASlikert_scale, required: true},
+            {prompt: "Rechercher le sens caché des films ou de pièces de théâtre perturbe le plaisir qu’ils procurent.", name: '20TO', labels: TASlikert_scale, required: true},
+            ],      
+        randomize_question_order: true, 
+        button_label: "Continuer",
+      };
+      //timeline.push(TAS);
+
+// Santarpia et al., 2008 for the French version of the VVIQ    
+var VVIQ_instructions = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "<p>Vous allez explorer le niveau de vivacité de l’image mentale évoquée par différentes propositions au moyen d’une échelle en 5 points. Exécutez bien toutes les propositions. Essayez de faire chaque item du questionnaire sans être influencé(e) par l’item précédent.</p><br><br>"+
+        "<p><i>Conseils : Examinez attentivement les échelles de réponse pour chaque question et n'oubliez pas de faire défiler vers le bas pour voir tous les énoncés avant de soumettre vos réponses.<i></p>",
+        choices: ["Continuer"],
+        data: {screen: "VVIQ_instructions"},
+      };
+      //timeline.push(VVIQ_instructions);
+
+      var VVIQlikert_scale = [
+        "Aucune image n’est visible.",
+        "L’image est vague et imprécise.",
+        "L’image est moyennement nette et vivace.",
+        "L’image est relativement nette, presque aussi précise et vivace qu’une perception.",
+        "L’image est parfaitement nette, aussi précise et vivace qu’une véritable perception.",
+      ];
+
+      var VVIQ = {
+        type: jsPsychSurveyLikert,
+        data: {screen: "VVIQ"},
+        questions: [ //color setting was initially for a better visual segmentation of the different groups of questions, but <br> works well
+            {prompt: "<p style='color: #000000;'><b>Imaginez attentivement un(e) ami(e) que vous voyez fréquemment (qui n’est pas présent(e) en ce moment) :</b></p>", name: '0VF', labels: false, required: true},
+            {prompt: "<p style='color: #000000;'>Le contour exact de son visage, de sa tête, de ses épaules et de son corps :</p>", name: '1VF', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Les positions de sa tête, les postures de son corps, etc. :</p>", name: '2VF', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Sa démarche précise, la longueur de ses pas, etc. lorsqu’il (elle) marche :</p>", name: '3VF', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Les différentes couleurs de certains de ses vêtements habituels :</p>", name: '4VF', labels: VVIQlikert_scale, required: true},
+            {prompt: "<br><br><br><br><br><br><p style='color: #000000;'><b>Imaginez le lever du soleil. Analysez attentivement l’image qui apparaît :</b></p>", name: '0VR', labels: false, required: true},
+            {prompt: "<p style='color: #000000;'>Le soleil se lève à l’horizon dans un ciel brumeux :</p>", name: '5VR', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Le ciel s’éclaircit et entoure le soleil de bleu :</p>", name: '6VR', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Nuages. Une tempête éclate avec des éclairs :</p>", name: '7VR', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Un arc-en-ciel apparaît :</p>", name: '8VR', labels: VVIQlikert_scale, required: true},
+            {prompt: "<br><br><br><br><br><br><p style='color: #000000;'><b>Imaginez un magasin dans lequel vous allez souvent. Analysez en détail l’image qui vous vient à l’esprit :</b></p>", name: '0VS', labels: false, required: true},
+            {prompt: "<p style='color: #000000;'>La devanture du magasin qui se trouve de l’autre côté de la rue :</p>", name: '9VS', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Une vitrine avec les couleurs, la forme et les détails des articles en vente :</p>", name: '10VS', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Vous êtes proche de l’entrée. La couleur, la forme et les détails de la porte :</p>", name: '11VS', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Vous entrez dans le magasin et vous allez vers la caisse. Le commerçant vous sert. Vous lui donnez l’argent qu’il prend :</p>", name: '12VS', labels: VVIQlikert_scale, required: true},
+            {prompt: "<br><br><br><br><br><br><p style='color: #000000;'><b>Imaginez une scène de campagne avec des arbres, des montagnes,un lac. Analysez, en détail, les images que vous visualisez en esprit :</b></p>", name: '0VC', labels: false, required: true},
+            {prompt: "<p style='color: #000000;'>Les contours du paysage :</p>", name: '13VC', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>La couleur et la forme des arbres :</p>", name: '14VC', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>La couleur et la forme du lac :</p>", name: '15VC', labels: VVIQlikert_scale, required: true},
+            {prompt: "<p style='color: #000000;'>Un vent fort s’abat sur les arbres et sur le lac en produisant des vagues :</p>", name: '16VC', labels: VVIQlikert_scale, required: true},
+          ],      
+        randomize_question_order: false, 
+        button_label: "Continuer",
+      };
+      //timeline.push(VVIQ);
+
+      function calculateScoreForSurvey(surveyName, data) {
+        var totalScore = 0;
+        data.forEach(function(trial) {
+          if (trial.trial_type === 'survey-likert') {
+            if (trial.response) {
+              Object.keys(trial.response).forEach(function(key) {
+                if (key.endsWith(surveyName) && key.startsWith('0')==false) { 
+                  var responseValue = trial.response[key];
+                  // Reversed items
+                  if (key.startsWith('N')) {
+                    responseValue = 4 - responseValue;  
+                  };
+                  if (key.endsWith("AD") || key.endsWith("AI") || key.endsWith("AF") || key.endsWith("AS") || key.endsWith("AC") ) { 
+                    if (key.startsWith('N') && trial.response[key] > 1 || key.startsWith('N') == false && trial.response[key] <= 1 ) {
+                            responseValue = 0
+                        } else {
+                            responseValue = -1
+                        }
+                  };
+                  totalScore += responseValue + 1;
+                }
+              });
+            }
+          }
+        });
+        return totalScore;
+      }
+      
+const concretudeMots = {
+  "activité": "Moy",
+  "centre": "Moy",
+  "chaleur": "Moy",
+  "chanson": "Moy",
+  "côté": "Moy",
+  "environnement": "Moy",
+  "gouvernement": "Moy",
+  "lecture": "Moy",
+  "plaisir": "Moy",
+  "programme": "Moy",
+  "repos": "Moy",
+  "salaire": "Moy",
+  "science": "Moy",
+  "travailleur": "Moy",
+  "vacance": "Moy",
+  
+  "avantage": "Bas",
+  "chance": "Bas",
+  "confiance": "Bas",
+  "différence": "Bas",
+  "effort": "Bas",
+  "excuse": "Bas",
+  "explication": "Bas",
+  "façon": "Bas",
+  "importance": "Bas",
+  "intelligence": "Bas",
+  "mémoire": "Bas",
+  "méthode": "Bas",
+  "raison": "Bas",
+  "reste": "Bas",
+  "sentiment": "Bas",
+  
+  "boisson": "Haut",
+  "bouteille": "Haut",
+  "calendrier": "Haut",
+  "carotte": "Haut",
+  "dictionnaire": "Haut",
+  "escalier": "Haut",
+  "fenêtre": "Haut",
+  "fromage": "Haut",
+  "piscine": "Haut",
+  "poche": "Haut",
+  "sourire": "Haut",
+  "tableau": "Haut",
+  "vaisselle": "Haut",
+  "voiture": "Haut"
+};
+
+const VVIQ_block = {
+  timeline: [VVIQ_instructions, VVIQ]
+};
+
+const AQ_block = {
+  timeline: [AQ_instructions, AQ]
+};
+
+const TAS_block = {
+  timeline: [TAS_instructions, TAS]
+};
+
+const questionnaires = [VVIQ_block, AQ_block, TAS_block];
+
+const randomizedQuestionnaires = jsPsych.randomization.shuffle(questionnaires);
+
+for (const questionnaire of randomizedQuestionnaires) {
+  timeline.push(questionnaire);
+}
+
+timeline.push(general_instructions);
+
+const testsToShuffle = [
+  temporalseqBindingTest, 
+  temporalroomBindingTest,
+  spatialBindingTest, 
+  spatialAlloBindingTest, 
+  objectAssociationTrial
+];
+
+function generateBlock(index) {
+  let prevSpatialEgo, prevSpatialAllo, prevTempSeq, prevTempRoom;
+
+  return {
+    timeline: [
+      {
+        type: jsPsychCallFunction,
+        func: () => {
+          prevSpatialEgo = window.spatialEgoCorrectCounter;
+          prevSpatialAllo = window.spatialAlloCorrectCounter;
+          prevTempSeq = window.temporalSeqCorrectCounter;
+          prevTempRoom = window.temporalRoomCorrectCounter;
+        }
+      },
+      freeRecallTrial,
+      {
+        timeline: jsPsych.randomization.shuffle([...testsToShuffle]),
+        conditional_function: () => !window.shouldStop && !window.shouldSkipTests 
+      }
+    ],
+
+    conditional_function: function() {
+      return window.blockCount === index && !window.shouldStop;
+    },
+    
+    on_timeline_finish: function() {
+      if (window.spatialEgoCorrectCounter > prevSpatialEgo
+       || window.spatialAlloCorrectCounter > prevSpatialAllo) {
+        window.spatialCorrectCounter++;
+      }
+
+      if (window.temporalSeqCorrectCounter > prevTempSeq
+       || window.temporalRoomCorrectCounter > prevTempRoom) {
+        window.temporalCorrectCounter++;
+      }
+
+      window.blockCount++;
+    }
+  };
+}
+
+const allBlocks = []; // Probably a better way though
+for (let i = 0; i < 44; i++) {
+  allBlocks.push(generateBlock(i));
+}
+
+timeline.push(...allBlocks);
+
+      var finalScreen = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: function() {
+          return `
+            <p>Merci beaucoup pour votre participation !</p>
+            <br>
+            <p>Vos données ne seront enregistrées que lorsque vous cliquerez sur le bouton 'Finir l'expérience' ; vous aurez alors accès au code Prolific.</p>
+          `;
+        },
+        choices: ["Finir l'expérience"],
+        data: function() {
+          var tScore = calculateScoreForSurvey('TI', jsPsych.data.get().values()) 
+          + calculateScoreForSurvey('TD', jsPsych.data.get().values()) 
+          + calculateScoreForSurvey('TO', jsPsych.data.get().values());
+          var aScore = calculateScoreForSurvey('AD', jsPsych.data.get().values())
+          +calculateScoreForSurvey('AI', jsPsych.data.get().values())
+          +calculateScoreForSurvey('AF', jsPsych.data.get().values())
+          +calculateScoreForSurvey('AS', jsPsych.data.get().values())
+          +calculateScoreForSurvey('AC', jsPsych.data.get().values());
+          var vScore = calculateScoreForSurvey('VF', jsPsych.data.get().values())
+          +calculateScoreForSurvey('VR', jsPsych.data.get().values())
+          +calculateScoreForSurvey('VS', jsPsych.data.get().values())
+          +calculateScoreForSurvey('VC', jsPsych.data.get().values());
+
+          var tiScore = calculateScoreForSurvey('TI', jsPsych.data.get().values()) 
+          var tdScore =  calculateScoreForSurvey('TD', jsPsych.data.get().values()) 
+          var toScore =  calculateScoreForSurvey('TO', jsPsych.data.get().values());
+          var adScore = calculateScoreForSurvey('AD', jsPsych.data.get().values())
+          var aiScore = calculateScoreForSurvey('AI', jsPsych.data.get().values())
+          var afScore = calculateScoreForSurvey('AF', jsPsych.data.get().values())
+          var asScore = calculateScoreForSurvey('AS', jsPsych.data.get().values())
+          var acScore = calculateScoreForSurvey('AC', jsPsych.data.get().values());
+          var vfScore = calculateScoreForSurvey('VF', jsPsych.data.get().values())
+          var vrScore = calculateScoreForSurvey('VR', jsPsych.data.get().values())
+          var vsScore = calculateScoreForSurvey('VS', jsPsych.data.get().values())
+          var vcScore = calculateScoreForSurvey('VC', jsPsych.data.get().values());
+          
+          window.concretudeStats = {
+            Haut: 0,
+            Moy: 0,
+            Bas: 0,
+            Inconnu: 0
+          };
+          
+          if (window.foundWords && window.foundWords.length > 0) {
+            window.foundWords.forEach(mot => {
+              const niveau = concretudeMots[mot] || "Inconnu";
+              window.concretudeStats[niveau]++;
+            });
+          }
+          
+        return {
+            screen: "Final_Screen",
+            tScore: tScore,
+            aScore: aScore,
+            vScore: vScore,
+            tiScore: tiScore,
+            tdScore: tdScore,
+            toScore: toScore,
+            adScore: adScore,
+            aiScore: aiScore,
+            afScore: afScore,
+            asScore: asScore,
+            acScore: acScore,
+            vfScore: vfScore,
+            vrScore: vrScore,
+            vsScore: vsScore,
+            vcScore: vcScore,
+
+            correctTemporalSeqCount: window.temporalSeqCorrectCounter,
+            correctTemporalRoomCount: window.temporalRoomCorrectCounter,
+            correctSpatialEgoCount: window.spatialEgoCorrectCounter,
+            correctSpatialAlloCount: window.spatialAlloCorrectCounter,
+            correctTemporalCount: window.temporalCorrectCounter,
+            correctSpatialCount: window.spatialCorrectCounter,
+            correctObjectDetailCount: window.objectDetailCorrectCounter,
+            wordsFounds: window.foundWords,
+            totalFounds: window.foundWords.length,
+            
+            concretude_haut: window.concretudeStats.Haut,
+            concretude_moy: window.concretudeStats.Moy,
+            concretude_bas: window.concretudeStats.Bas,
+            
+            genreDetecte: window.gender,
+            age: window.age,
+            
+            completionTime: Date.now() - jsPsych.getStartTime()
+          };
+        },
+      };
+
+timeline.push(finalScreen);
+      
+
+var exit_fullscreen = {
+  type: jsPsychFullscreen,
+  fullscreen_mode: false,
+  delay_after: 0
+};
+
+timeline.push(exit_fullscreen);
+
+
+jsPsych.run(timeline);
